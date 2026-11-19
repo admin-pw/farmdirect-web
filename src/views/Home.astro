@@ -1,0 +1,200 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Accordion from '../components/Accordion.astro';
+import { site } from '../data/site';
+import { ui, fmt } from '../i18n/ui';
+import { r, type Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+const h = t.home;
+const v = { years: site.years };
+const img = (n: string) => `/assets/img/${n}`;
+const originIcons = ['layers', 'sun', 'drop', 'mountain'];
+const partnerIcons = ['waves', 'calendar', 'trend', 'globe'];
+const d = (i: number, step = 90) => `--d:${i * step}ms`;
+const ticker = [
+  h.hero.eyebrow,
+  t.common.freeShip,
+  `${fmt(h.years.big, v)} ${h.years.t}`,
+  `${h.acres.big} ${h.acres.t}`,
+  t.common.replies,
+  t.apply.perks[3],
+];
+---
+
+<Base lang={lang} pageKey="home" title={h.title} description={h.description} ogImage="/assets/img/Wedding-season.webp">
+  <div class="wrap">
+    <section class="hero" aria-labelledby="hero-title">
+      <img src={img('Wedding-season.webp')} alt={h.hero.alt} width="1920" height="1080" fetchpriority="high" decoding="async" />
+      <div class="content">
+        <p class="eyebrow" data-reveal style="--d:80ms">{h.hero.eyebrow}</p>
+        <h1 id="hero-title" style="margin:0">
+          <span class="l1" style="display:block" data-split>{h.hero.l1}</span>
+          <span class="l2" style="display:block;--split-delay:420ms" data-split>{h.hero.l2}</span>
+        </h1>
+        <a class="btn btn-green btn-sq" href={r('varieties', lang)} data-reveal style="--d:1100ms">{h.hero.cta}</a>
+      </div>
+      <div class="hero-chips" data-reveal style="--d:1400ms">
+        <div class="chip-stat"><b>{fmt(h.years.big, v)}</b><span>{h.years.t}</span></div>
+        <div class="chip-stat"><b>{h.acres.big}</b><span>{h.acres.t}</span></div>
+        <div class="chip-stat wide"><Icon name="globe" /><span>{t.common.freeShip}</span></div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        {[0, 1].map(() => (
+          <ul>
+            {ticker.map((x) => <li><Icon name="flower" />{x}</li>)}
+          </ul>
+        ))}
+      </div>
+    </div>
+
+    <section class="section box about-box" aria-labelledby="about-label">
+      <div class="tabs">
+        <div>
+          <span class="pill" id="about-label">{h.aboutLabel}</span>
+          <div class="tab-list" role="tablist" aria-label={h.aboutLabel}>
+            {h.tabs.map((tab, i) => (
+              <button type="button" role="tab" id={`tab-${i}`} aria-controls={`panel-${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>{tab.k}</button>
+            ))}
+          </div>
+        </div>
+        <div class="tab-panels">
+          {h.tabs.map((tab, i) => (
+            <div class="tab-panel" role="tabpanel" id={`panel-${i}`} aria-labelledby={`tab-${i}`} hidden={i !== 0}>
+              <p class="lead">{fmt(tab.lead, v)}</p>
+              <p class="sub">{tab.sub}</p>
+              <a class="btn btn-outline btn-right" href={r('about', lang)}>{t.common.learnMore} <Icon name="arrow" /></a>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-card photo" data-reveal><img src={img('IMG_8573-1-1-scaled.webp')} alt="" loading="lazy" decoding="async" /></div>
+        <div class="stat-card" data-reveal style={d(1)}>
+          <div class="big" data-count={site.years} data-prefix="+">{fmt(h.years.big, v)}</div>
+          <h3>{h.years.t}</h3>
+          <p>{fmt(h.years.d, v)}</p>
+        </div>
+        <div class="stat-card photo" data-reveal style={d(2)}><img src={img('magnific_create-a-professional-pho_2919792126.webp')} alt="" loading="lazy" decoding="async" /></div>
+        <div class="stat-card dark" data-reveal style={d(3)}>
+          <div class="big" data-count="200" data-prefix="+">{h.acres.big}</div>
+          <h3>{h.acres.t}</h3>
+          <p>{h.acres.d}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="altitude-title">
+      <div class="banner" data-reveal>
+        <img src={img('5-2.webp')} alt={h.altitude.alt} loading="lazy" decoding="async" />
+        <div class="content">
+          <h2 id="altitude-title">
+            <span style="display:block" data-split>{h.altitude.l1}</span>
+            <span style="display:block;--split-delay:260ms" data-split>{h.altitude.l2}</span>
+          </h2>
+          <a class="btn btn-outline-light" href={r('varieties', lang)}>{h.altitude.cta}</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section origin-grid" aria-label={h.altitude.l1 + ' ' + h.altitude.l2}>
+      {h.origin.map((o, i) => (
+        <article class="origin-item" data-reveal style={d(i)}>
+          <span class="icon-circle"><Icon name={originIcons[i]} /></span>
+          <h3>{o.t}</h3>
+          <p>{o.d}</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="section partners" aria-labelledby="partners-title">
+      <div class="partners-head">
+        <h2 id="partners-title" data-split>{h.partners.title}</h2>
+        <p class="sub" data-reveal style="--d:200ms">{h.partners.sub}</p>
+      </div>
+      <div class="partners-body">
+        <figure class="partner-photo" data-reveal>
+          <img src={img('IMG_8585-1.webp')} alt={h.partners.photoAlt} loading="lazy" decoding="async" />
+          <figcaption class="partner-chip">
+            <b>{fmt(h.years.big, v)}</b>
+            <span>{h.years.t}</span>
+          </figcaption>
+        </figure>
+        <div class="partner-grid">
+          {h.partners.items.map((p, i) => (
+            <article class="partner-card" data-reveal style={d(i)}>
+              <span class="num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <span class="icon-circle"><Icon name={partnerIcons[i]} /></span>
+              <h3>{p.t}</h3>
+              <p>{p.d}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq-block" aria-labelledby="faq-title">
+      <div class="faq-card" data-reveal>
+        <p class="label">{h.faq.label}</p>
+        <h2 id="faq-title" data-split>{h.faq.title}</h2>
+        <p class="intro">{h.faq.intro}</p>
+        <Accordion items={h.faq.items} />
+        <p style="margin:26px 0 0"><a class="btn btn-outline-light" href={r('contact', lang)}>{h.faq.cta} <Icon name="arrow" /></a></p>
+      </div>
+      <div class="faq-photo" data-reveal style="--d:120ms">
+        <img src={img('32917.webp')} alt={h.faq.photoAlt} loading="lazy" decoding="async" />
+        <div class="glass">
+          <h3>{h.faq.glass.t}</h3>
+          <p>{h.faq.glass.d}</p>
+          <a class="btn btn-outline-light" href={r('about', lang)}>{t.common.learnMore} <Icon name="arrow" /></a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Gentle parallax on the altitude banner photo.
+    const bannerImg = document.querySelector<HTMLImageElement>('.banner > img');
+    if (bannerImg && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const move = () => {
+        const r = bannerImg.parentElement!.getBoundingClientRect();
+        const p = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
+        bannerImg.style.translate = '0 ' + Math.max(-1, Math.min(1, p)) * -40 + 'px';
+      };
+      move();
+      window.addEventListener('scroll', move, { passive: true });
+    }
+  </script>
+  <script>
+    // Accessible tabs for the About block (arrow keys, Home/End).
+    const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.tab-list [role=tab]'));
+    const select = (i: number, focus = false) => {
+      tabs.forEach((tab, n) => {
+        const on = n === i;
+        tab.setAttribute('aria-selected', String(on));
+        tab.tabIndex = on ? 0 : -1;
+        const panel = document.getElementById(tab.getAttribute('aria-controls') || '');
+        if (panel) panel.hidden = !on;
+        if (on && focus) tab.focus();
+      });
+    };
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => select(i));
+      tab.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); select((i + 1) % tabs.length, true); }
+        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); select((i - 1 + tabs.length) % tabs.length, true); }
+        if (e.key === 'Home') { e.preventDefault(); select(0, true); }
+        if (e.key === 'End') { e.preventDefault(); select(tabs.length - 1, true); }
+      });
+    });
+  </script>
+</Base>

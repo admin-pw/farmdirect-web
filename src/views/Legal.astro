@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+import { ui } from '../i18n/ui';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  kind: 'privacy' | 'terms';
+}
+const { lang, kind } = Astro.props;
+const t = ui[lang];
+
+// TEMPLATE TEXT: must be reviewed and replaced by the client's legal counsel before launch.
+const docs = {
+  privacy: {
+    en: {
+      title: 'Privacy Policy | Farm Direct',
+      h1: 'Privacy Policy',
+      sections: [
+        ['Who we are', `Farm Direct Corp ("Farm Direct", "we") sells wholesale flowers to businesses in the United States. Contact: ${site.email}, ${site.phone}.`],
+        ['Information we collect', 'Details you submit in our forms (name, company, email, phone, business type, message) and basic technical and usage data (pages viewed, device, approximate location, referring source and campaign parameters).'],
+        ['How we use it', 'To answer your request, prepare quotes, manage your account and orders, improve our website and measure our advertising. We do not sell your personal information.'],
+        ['Sharing', 'We share data only with service providers that help us operate (for example email, CRM, analytics and advertising platforms) and when required by law.'],
+        ['Cookies and analytics', 'We use analytics and advertising tags to understand site use and measure campaigns. You can control cookies in your browser settings.'],
+        ['Your choices', `You may ask to access, correct or delete your information, or opt out of marketing, by emailing ${site.email}. California residents may have additional rights under the CCPA/CPRA.`],
+        ['Retention and security', 'We keep information only as long as needed for the purposes above and use reasonable safeguards to protect it.'],
+        ['Changes', 'We may update this policy; the latest version is always the one posted on this page.'],
+      ],
+    },
+    es: {
+      title: 'Política de privacidad | Farm Direct',
+      h1: 'Política de privacidad',
+      sections: [
+        ['Quiénes somos', `Farm Direct Corp ("Farm Direct", "nosotros") vende flores al por mayor a empresas en Estados Unidos. Contacto: ${site.email}, ${site.phone}.`],
+        ['Información que recopilamos', 'Los datos que envía en nuestros formularios (nombre, empresa, correo, teléfono, tipo de negocio, mensaje) y datos técnicos y de uso básicos (páginas vistas, dispositivo, ubicación aproximada, origen y parámetros de campaña).'],
+        ['Cómo la usamos', 'Para responder su solicitud, preparar cotizaciones, gestionar su cuenta y pedidos, mejorar el sitio y medir nuestra publicidad. No vendemos su información personal.'],
+        ['Con quién la compartimos', 'Solo con proveedores que nos ayudan a operar (por ejemplo correo, CRM, analítica y plataformas publicitarias) y cuando la ley lo exige.'],
+        ['Cookies y analítica', 'Usamos etiquetas de analítica y publicidad para entender el uso del sitio y medir campañas. Puede controlar las cookies en la configuración de su navegador.'],
+        ['Sus opciones', `Puede solicitar acceso, corrección o eliminación de sus datos, o dejar de recibir mensajes de marketing, escribiendo a ${site.email}. Los residentes de California pueden tener derechos adicionales bajo CCPA/CPRA.`],
+        ['Conservación y seguridad', 'Conservamos la información solo el tiempo necesario y aplicamos medidas razonables para protegerla.'],
+        ['Cambios', 'Podemos actualizar esta política; la versión vigente es siempre la publicada en esta página.'],
+      ],
+    },
+  },
+  terms: {
+    en: {
+      title: 'Terms & Conditions | Farm Direct',
+      h1: 'Terms & Conditions',
+      sections: [
+        ['Scope', 'These terms apply to use of this website and to quotes and sales of flowers by Farm Direct Corp to business customers.'],
+        ['Orders and pricing', 'Minimum order is one box. Prices depend on the pack and season and are confirmed by your account manager at the time of order. Website prices are indicative and not a binding offer.'],
+        ['Shipping', 'Shipping is complimentary to all 50 states. Deliveries are scheduled Monday through Friday. Orders should be placed at least four days in advance; typical delivery is 3–5 business days.'],
+        ['Quality claims', 'Report any issue within 24 hours of delivery with photos and details of the affected stems. Approved claims are credited to your account for future orders.'],
+        ['Standing orders', 'Customers who maintain a standing order for a year (52 weeks fulfilled) may be eligible to double it on Valentine’s Day and Mother’s Day.'],
+        ['Liability', 'To the maximum extent permitted by law, Farm Direct is not liable for indirect or consequential losses. Perishable goods are handled under industry standards.'],
+        ['Contact', `Questions about these terms: ${site.email}.`],
+      ],
+    },
+    es: {
+      title: 'Términos y condiciones | Farm Direct',
+      h1: 'Términos y condiciones',
+      sections: [
+        ['Alcance', 'Estos términos aplican al uso de este sitio y a las cotizaciones y ventas de flores de Farm Direct Corp a clientes empresariales.'],
+        ['Pedidos y precios', 'El pedido mínimo es una caja. Los precios dependen del paquete y la temporada y los confirma su ejecutivo de cuenta al momento del pedido. Los precios del sitio son indicativos y no constituyen una oferta vinculante.'],
+        ['Envíos', 'El envío es gratuito a los 50 estados. Las entregas se programan de lunes a viernes. Los pedidos deben hacerse con al menos cuatro días de anticipación; la entrega típica es de 3 a 5 días hábiles.'],
+        ['Reclamos de calidad', 'Reporte cualquier problema dentro de las 24 horas posteriores a la entrega con fotos y detalles de los tallos afectados. Los reclamos aprobados se acreditan a su cuenta para futuros pedidos.'],
+        ['Pedidos recurrentes', 'Los clientes que mantengan un pedido recurrente durante un año (52 semanas cumplidas) pueden ser elegibles para duplicarlo en San Valentín y el Día de la Madre.'],
+        ['Responsabilidad', 'En la máxima medida permitida por la ley, Farm Direct no responde por pérdidas indirectas o consecuentes. Los productos perecederos se manejan según los estándares de la industria.'],
+        ['Contacto', `Preguntas sobre estos términos: ${site.email}.`],
+      ],
+    },
+  },
+};
+const d = docs[kind][lang];
+---
+
+<Base lang={lang} pageKey={kind} title={d.title} description={d.title} noindex>
+  <div class="wrap">
+    <section class="page-box" style="min-height:clamp(240px,36svh,360px)">
+      <h1 style="max-width:18ch">{d.h1}</h1>
+    </section>
+    <section class="section box">
+      <div class="prose">
+        <div class="banner-note">{t.legal.draftBanner}</div>
+        {d.sections.map(([h, p]) => (<><h2>{h}</h2><p>{p}</p></>))}
+      </div>
+    </section>
+  </div>
+</Base>

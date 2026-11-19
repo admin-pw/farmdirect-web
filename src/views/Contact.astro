@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import LeadForm from '../components/LeadForm.astro';
+import Accordion from '../components/Accordion.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+import { ui } from '../i18n/ui';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+const c = t.contact;
+---
+
+<Base lang={lang} pageKey="contact" title={c.title} description={c.description} ogImage="/assets/img/IMG_8572-2-scaled.webp">
+  <div class="wrap">
+    <section class="contact-hero">
+      <img src="/assets/img/IMG_8572-2-scaled.webp" alt={c.imgAlt} width="683" height="1024" fetchpriority="high" decoding="async" />
+      <div class="content">
+        <p class="eyebrow" data-reveal>{t.nav.contact}</p>
+        <h1 data-split>{c.h1}</h1>
+        <p class="lede" data-reveal style="--d:300ms">{c.sub}</p>
+      </div>
+    </section>
+
+    <section class="section contact-grid">
+      <aside class="contact-info" data-reveal aria-label={t.footer.contactDetails}>
+        <p class="kicker">{t.footer.contactDetails}</p>
+        <a class="info-row" href={site.phoneHref} data-loc="contact">
+          <span class="ico"><Icon name="phone" /></span>
+          <span><small>{t.common.salesLine}</small><b>{site.phone}</b></span>
+        </a>
+        <a class="info-row" href={`mailto:${site.email}`} data-loc="contact">
+          <span class="ico"><Icon name="mail" /></span>
+          <span><small>{t.common.emailUs}</small><b>{site.email}</b></span>
+        </a>
+
+        <h2 class="steps-title">{t.thanks.nextTitle}</h2>
+        <ol class="steps">
+          {t.thanks.steps.map((s) => (
+            <li><b>{s.t}</b><span>{s.d}</span></li>
+          ))}
+        </ol>
+
+        <ul class="perks">
+          <li>{t.common.freeShip}</li>
+          <li>{t.common.replies}</li>
+          {t.apply.perks.slice(3).map((p) => <li>{p}</li>)}
+        </ul>
+
+        <div class="social">
+          <a href={site.social.facebook} target="_blank" rel="noopener" aria-label="Facebook"><Icon name="facebook" /></a>
+          <a href={site.social.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Icon name="instagram" /></a>
+          <a href={site.social.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+        </div>
+      </aside>
+
+      <div class="form-card" data-reveal style="--d:120ms">
+        <h2 class="form-title">{t.common.requestQuote}</h2>
+        <p class="form-sub">{t.thanks.sub}</p>
+        <LeadForm lang={lang} source="contact" variant="contact" />
+      </div>
+    </section>
+
+    <section class="section box faq-wide-box" style="padding-block:clamp(26px,4vw,56px)">
+      <div class="faq-wide">
+        <h2 data-split>{c.faqTitle}</h2>
+        <Accordion items={c.faq} light />
+      </div>
+    </section>
+  </div>
+</Base>

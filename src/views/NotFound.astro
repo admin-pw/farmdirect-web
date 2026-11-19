@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+import { ui } from '../i18n/ui';
+import { r, type Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<Base lang={lang} title={t.notFound.title} description={t.notFound.sub} noindex>
+  <div class="wrap">
+    <section class="page-box">
+      <div>
+        <p class="label">404</p>
+        <h1 style="max-width:16ch">{t.notFound.h1}</h1>
+        <p style="margin-bottom:24px">{t.notFound.sub}</p>
+        <div class="btn-row" style="justify-content:center">
+          <a class="btn btn-green" href={r('home', lang)}>{t.nav.home}</a>
+          <a class="btn btn-outline" href={r('varieties', lang)}>{t.nav.varieties}</a>
+          <a class="btn btn-outline" href={r('contact', lang)}>{t.nav.contact}</a>
+          <a class="btn btn-outline" href={site.phoneHref} data-loc="404">{site.phone}</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>

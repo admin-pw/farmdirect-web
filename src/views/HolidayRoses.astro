@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro';
+import LeadForm from '../components/LeadForm.astro';
+import Reviews from '../components/Reviews.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+import { ui } from '../i18n/ui';
+import { r, type Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+const h = t.holiday;
+const pickImg = [site.assets.dallasSmall, site.assets.pinkFloyd];
+---
+
+<Base lang={lang} pageKey="holiday" title={h.title} description={h.description} ogImage={site.assets.dallas}>
+  <div class="wrap">
+    <section class="hero-box split">
+      <div>
+        <p class="eyebrow">{h.eyebrow}</p>
+        <h1>{h.h1}</h1>
+        <p class="lead">{h.secureSub}</p>
+        <ul class="perks"><li>{t.common.freeShip}</li><li>{t.common.replies}</li></ul>
+        <p style="margin-top:22px">{t.common.orByPhone} <a style="color:var(--coral);font-weight:700" href={site.phoneHref} data-loc="holiday-hero">{site.phone}</a></p>
+      </div>
+      <div class="form-card" id="quote">
+        <p class="pill" style="margin-bottom:12px">{h.formEyebrow}</p>
+        <h2 class="form-title">{h.formTitle}</h2>
+        <p class="form-sub">{h.formSub}</p>
+        <LeadForm lang={lang} source="holiday_roses" variant="quote" />
+        <p class="form-note" style="margin-top:12px">{h.formNote}</p>
+      </div>
+    </section>
+
+    <section class="section box">
+      <h2 class="h2-display" style="margin-bottom:22px">{h.secureTitle}</h2>
+      <div class="cards-3">
+        {h.benefits.map((b) => (
+          <article class="card"><h3>{b.t}</h3><p>{b.d}</p></article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section reviews" style="padding-block:clamp(24px,4vw,56px)">
+      <Reviews lang={lang} />
+    </section>
+
+    <section class="section box">
+      <h2 class="h2-display" style="margin-bottom:6px">{h.forecastTitle}</h2>
+      <p style="color:var(--muted);margin-bottom:22px">{h.forecastSub}</p>
+      <div class="cards-3">
+        {h.occasions.map((o) => (
+          <article class="card">
+            <div class="when">{o.when}</div>
+            <h3>{o.t}</h3>
+            <p>{o.d}</p>
+            {o.flag && <span class="flag">{o.flag}</span>}
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="h2-display" style="margin-bottom:18px">{h.picksTitle}</h2>
+      <div class="picks">
+        {h.picks.map((p, i) => (
+          <figure class="pick">
+            <img src={pickImg[i]} alt={`${p.n} roses`} width="480" height="600" loading="lazy" />
+            <figcaption><b>{p.n}</b>{p.d}</figcaption>
+          </figure>
+        ))}
+      </div>
+      <p style="margin-top:20px"><a class="btn btn-outline" href={r('varieties', lang)}>{h.seeCatalog} <Icon name="arrow" /></a></p>
+    </section>
+
+    <section class="section window">
+      <div>
+        <div class="lbl">{h.windowLabel}</div>
+        <b>{site.holidayWindow[lang]}</b>
+      </div>
+      <a class="btn btn-outline-light" href="#quote">{h.reserve} <Icon name="arrow" /></a>
+    </section>
+  </div>
+</Base>

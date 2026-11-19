@@ -1,0 +1,210 @@
+---
+import { site } from '../data/site';
+import { ui } from '../i18n/ui';
+import { r, type Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  source: string; // e.g. holiday_roses, apply, contact, variety_detail
+  variant?: 'quote' | 'account' | 'contact' | 'order' | 'cart';
+  variety?: string;
+  submitLabel?: string;
+}
+const { lang, source, variant = 'quote', variety = '', submitLabel } = Astro.props;
+const f = ui[lang].form;
+const id = `${source}${variety ? '-' + variety : ''}`.replace(/[^a-z0-9-]/gi, '');
+const label = submitLabel ?? (variant === 'account' ? f.submitAccount : variant === 'contact' ? f.submitContact : f.submitQuote);
+---
+
+<form
+  class="lead-form"
+  novalidate
+  data-source={source}
+  data-lang={lang}
+  data-variety={variety}
+  data-endpoint={site.formEndpoint}
+  data-mailto={site.email}
+  data-thanks={r('thanks', lang)}
+>
+  <div class="row two">
+    <div class="field">
+      <label for={`${id}-name`}>{f.name} *</label>
+      <input id={`${id}-name`} name="name" autocomplete="given-name" required />
+      <div class="err">{f.errName}</div>
+    </div>
+    <div class="field">
+      <label for={`${id}-lastname`}>{f.lastname} *</label>
+      <input id={`${id}-lastname`} name="lastname" autocomplete="family-name" required />
+      <div class="err">{f.errLast}</div>
+    </div>
+  </div>
+  <div class="field">
+    <label for={`${id}-business`}>{f.business} *</label>
+    <input id={`${id}-business`} name="business" autocomplete="organization" required />
+    <div class="err">{f.errBusiness}</div>
+  </div>
+  <div class="row two">
+    <div class="field">
+      <label for={`${id}-email`}>{f.email} *</label>
+      <input id={`${id}-email`} name="email" type="email" autocomplete="email" inputmode="email" required />
+      <div class="err">{f.errEmail}</div>
+    </div>
+    <div class="field">
+      <label for={`${id}-phone`}>{f.phone} *</label>
+      <input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" inputmode="tel" required />
+      <div class="err">{f.errPhone}</div>
+    </div>
+  </div>
+  <div class={variant === 'account' ? 'row two' : 'row'}>
+    <div class="field">
+      <label for={`${id}-segment`}>{f.segment} *</label>
+      <select id={`${id}-segment`} name="segment" required>
+        <option value="">{f.select}</option>
+        {f.segments.map((s) => <option value={s.v}>{s.l}</option>)}
+      </select>
+      <div class="err">{f.errSegment}</div>
+    </div>
+    {
+      variant === 'account' && (
+        <div class="field">
+          <label for={`${id}-volume`}>{f.volume}</label>
+          <select id={`${id}-volume`} name="volume">
+            <option value="">{f.select}</option>
+            {f.volumes.map((s) => <option value={s.v}>{s.l}</option>)}
+          </select>
+        </div>
+      )
+    }
+  </div>
+  {
+    (variant === 'contact' || variant === 'order') && (
+      <div class="field">
+        <label for={`${id}-message`}>{variant === 'order' ? f.orderMsg : f.message}</label>
+        <textarea id={`${id}-message`} name="message" rows={variant === 'order' ? 4 : 3} />
+      </div>
+    )
+  }
+  {variant === 'cart' && <input type="hidden" name="message" value="" />}
+  <div class="hp" aria-hidden="true">
+    <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+  </div>
+  <div class="form-error" role="alert">{f.fail} <a href={`mailto:${site.email}`}>{site.email}</a>.</div>
+  <button class="btn btn-green" type="submit" data-sending={f.sending}>{label}</button>
+  <p class="form-note">{f.note}</p>
+</form>
+
+<script>
+  type DL = Record<string, unknown>[];
+  const w = window as unknown as { dataLayer: DL };
+  w.dataLayer = w.dataLayer || [];
+
+  // Persist attribution (UTMs, click ids, referrer) for the session so it reaches the CRM with the lead.
+  const KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'gclid'];
+  let attr: Record<string, string> = {};
+  try {
+    attr = JSON.parse(sessionStorage.getItem('fd_attr') || '{}');
+    const q = new URLSearchParams(location.search);
+    KEYS.forEach((k) => {
+      const v = q.get(k);
+      if (v) attr[k] = v;
+    });
+    if (!attr.referrer && document.referrer) attr.referrer = document.referrer;
+    if (!attr.landing_page) attr.landing_page = location.pathname;
+    sessionStorage.setItem('fd_attr', JSON.stringify(attr));
+  } catch {
+    /* storage unavailable: continue without attribution */
+  }
+
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  document.querySelectorAll<HTMLFormElement>('form.lead-form').forEach((form) => {
+    const source = form.dataset.source || 'form';
+    let started = false;
+    let sending = false;
+
+    form.addEventListener('focusin', () => {
+      if (started) return;
+      started = true;
+      w.dataLayer.push({ event: 'lead_form_start', lead_source: source });
+    });
+
+    const setInvalid = (el: HTMLElement, bad: boolean) => el.closest('.field')?.classList.toggle('invalid', bad);
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (sending) return;
+      const data = new FormData(form);
+      const get = (k: string) => String(data.get(k) || '').trim();
+      const checks: [string, boolean][] = [
+        ['name', get('name').length > 1],
+        ['lastname', get('lastname').length > 1],
+        ['business', get('business').length > 1],
+        ['email', emailRe.test(get('email'))],
+        ['phone', get('phone').replace(/\D/g, '').length >= 7],
+        ['segment', get('segment') !== ''],
+      ];
+      let firstBad: HTMLElement | null = null;
+      checks.forEach(([k, ok]) => {
+        const el = form.elements.namedItem(k) as HTMLElement;
+        setInvalid(el, !ok);
+        if (!ok && !firstBad) firstBad = el;
+      });
+      const errBox = form.querySelector('.form-error') as HTMLElement;
+      errBox.classList.remove('show');
+      if (firstBad) {
+        w.dataLayer.push({ event: 'lead_form_error', lead_source: source });
+        (firstBad as HTMLElement).focus();
+        return;
+      }
+      // Honeypot: bots fill it. Pretend success without sending.
+      if (get('website')) {
+        location.href = form.dataset.thanks || '/';
+        return;
+      }
+
+      const payload = new URLSearchParams();
+      data.forEach((v, k) => {
+        if (k !== 'website') payload.set(k, String(v));
+      });
+      payload.set('source', source);
+      payload.set('lang', form.dataset.lang || 'en');
+      if (form.dataset.variety) payload.set('variety', form.dataset.variety);
+      payload.set('page_url', location.href);
+      payload.set('page_title', document.title);
+      payload.set('submitted_at', new Date().toISOString());
+      Object.entries(attr).forEach(([k, v]) => payload.set(k, v));
+
+      const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
+      const label = btn.textContent;
+      const done = () => {
+        w.dataLayer.push({ event: 'lead_submit', lead_source: source, lead_lang: form.dataset.lang, variety: form.dataset.variety || undefined });
+        location.href = `${form.dataset.thanks}?s=${encodeURIComponent(source)}`;
+      };
+      const fail = () => {
+        sending = false;
+        btn.disabled = false;
+        btn.textContent = label;
+        errBox.classList.add('show');
+        w.dataLayer.push({ event: 'lead_form_error', lead_source: source, reason: 'network' });
+      };
+
+      const endpoint = form.dataset.endpoint;
+      if (!endpoint) {
+        // No endpoint configured: fall back to a prefilled email so no lead is lost.
+        const body = [...payload.entries()].map(([k, v]) => `${k}: ${v}`).join('\n');
+        location.href = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent('Quote request (' + source + ')')}&body=${encodeURIComponent(body)}`;
+        return;
+      }
+      sending = true;
+      btn.disabled = true;
+      btn.textContent = btn.dataset.sending || '…';
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        body: payload.toString(),
+        mode: 'no-cors', // same transport the current Make webhook already accepts
+        keepalive: true,
+      }).then(done, fail);
+    });
+  });
+</script>

@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+import { ui } from '../i18n/ui';
+import { r, type Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+const x = t.thanks;
+---
+
+<Base lang={lang} pageKey="thanks" title={x.title} description={x.sub} noindex>
+  <div class="wrap">
+    <section class="page-box" style="min-height:clamp(280px,44svh,420px)">
+      <div>
+        <h1 style="max-width:18ch">{x.h1}</h1>
+        <p style="font-size:1.1rem">{x.sub}</p>
+      </div>
+    </section>
+    <section class="section box">
+      <h2 class="h2-display" style="margin-bottom:20px">{x.nextTitle}</h2>
+      <div class="cards-3">
+        {x.steps.map((s) => (
+          <article class="card"><h3>{s.t}</h3><p>{s.d}</p></article>
+        ))}
+      </div>
+      <p style="margin:28px 0 14px;font-weight:600">{x.urgent} <a href={site.phoneHref} data-loc="thanks">{site.phone}</a></p>
+      <a class="btn btn-green" href={r('varieties', lang)}>{x.browse}</a>
+    </section>
+  </div>
+  <script>
+    // Fires once per visit; GTM can use this as the confirmed-lead conversion.
+    const w = window as unknown as { dataLayer: Record<string, unknown>[] };
+    w.dataLayer = w.dataLayer || [];
+    w.dataLayer.push({ event: 'thank_you_view', lead_source: new URLSearchParams(location.search).get('s') || 'unknown' });
+  </script>
+</Base>

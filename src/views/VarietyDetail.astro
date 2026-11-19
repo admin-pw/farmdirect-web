@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+import LeadForm from '../components/LeadForm.astro';
+import VarietyCard from '../components/VarietyCard.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+import { ui } from '../i18n/ui';
+import { r, varietyPath, type Lang } from '../i18n/routes';
+import { varieties, money, packLabel, lengthLabel, type Variety } from '../data/varieties';
+
+interface Props {
+  lang: Lang;
+  v: Variety;
+}
+const { lang, v } = Astro.props;
+const t = ui[lang];
+const d = t.varieties.detail;
+const catMeta = t.varieties.cats.find((c) => c.cat === v.category);
+const catName = catMeta?.t ?? v.category;
+const cultivars = v.attrs['Variety'] ?? [];
+const colors = v.attrs['Color'] ?? [];
+const packs = (v.attrs['Number of Stems Per Box'] ?? []).map((p) => packLabel(p, lang));
+const lengths = (v.attrs['Length'] ?? []).map((l) => lengthLabel(l, lang));
+const related = varieties.filter((x) => x.category === v.category && x.id !== v.id).slice(0, 4);
+const title = lang === 'en' ? `${v.name} | Wholesale ${catName} from Ecuador | Farm Direct` : `${v.name} | ${catName} mayoristas de Ecuador | Farm Direct`;
+const description = (v.short || v.desc || catMeta?.d || '').slice(0, 155);
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: v.name,
+  image: v.images,
+  description: v.desc || v.short || catMeta?.d,
+  category: catName,
+  brand: { '@type': 'Brand', name: site.name },
+  ...(site.showPrices && v.priceFrom > 0
+    ? { offers: { '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: v.priceFrom, highPrice: v.priceTo, availability: 'https://schema.org/InStock', url: new URL(varietyPath('en', v.slug), site.domain).href } }
+    : {}),
+};
+const alternates = { en: varietyPath('en', v.slug), es: varietyPath('es', v.slug) };
+---
+
+<Base lang={lang} title={title} description={description} alternates={alternates} ogImage={v.localImage || undefined} jsonLd={[ld]}>
+  <div class="wrap">
+    <section class="section box">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href={r('home', lang)}>{t.common.home}</a> / <a href={r('varieties', lang)}>{t.nav.varieties}</a> / <span>{v.name}</span>
+      </nav>
+      <div class="detail">
+        <div class="gallery">
+          <div class="main">{v.localImage && <img src={v.localImage} alt={v.name} width="720" height="540" fetchpriority="high" />}</div>
+        </div>
+        <div>
+          <p class="pill" style="margin-bottom:14px">{catName}</p>
+          <h1>{v.name}</h1>
+          {site.showPrices && v.priceFrom > 0 && <div class="price-lg">{t.common.from} {money(v.priceFrom, lang)} <small style="font-family:var(--body);font-size:1rem;font-weight:500">{t.common.perBox}</small></div>}
+          {site.showPrices && <p class="fine">{d.priceNote}</p>}
+          {v.short && <p style="font-weight:600">{v.short}</p>}
+          {v.desc && <p>{v.desc}</p>}
+          {packs.length > 0 && (<><h3 class="sub">{d.packs}</h3><ul class="pills">{packs.map((p) => <li>{p}</li>)}</ul></>)}
+          {lengths.length > 0 && (<><h3 class="sub">{d.lengths}</h3><ul class="pills">{lengths.map((p) => <li>{p}</li>)}</ul></>)}
+          {cultivars.length > 0 && (<><h3 class="sub">{d.cultivars}</h3><ul class="pills">{cultivars.map((p) => <li>{p}</li>)}</ul></>)}
+          {colors.length > 0 && (<><h3 class="sub">{d.colors}</h3><ul class="pills">{colors.map((p) => <li>{p}</li>)}</ul></>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-box" id="quote">
+      <div class="contact-photo" style="align-content:center">
+        <div class="callout">
+          <h3>{d.orderTitle}</h3>
+          <p>{d.orderSub}</p>
+          <a class="big-phone" href={site.phoneHref} data-loc="variety">{site.phone}</a>
+          <ul class="perks"><li>{t.common.freeShip}</li><li>{t.common.replies}</li></ul>
+        </div>
+      </div>
+      <div class="contact-panel">
+        <div class="form-card">
+          <h2 class="form-title">{t.common.requestQuote}</h2>
+          <p class="form-sub">{v.name}</p>
+          <LeadForm lang={lang} source="variety_detail" variety={v.slug} variant="quote" />
+        </div>
+      </div>
+    </section>
+
+    {
+      related.length > 0 && (
+        <section class="section box">
+          <h2 class="h2-display" style="margin-bottom:18px">{d.related}</h2>
+          <div class="tiles">{related.map((x) => <VarietyCard lang={lang} v={x} />)}</div>
+          <p style="margin:22px 0 0"><a class="btn btn-outline" href={r('varieties', lang)}><Icon name="arrow" />{t.common.backToVarieties}</a></p>
+        </section>
+      )
+    }
+  </div>
+</Base>

@@ -1,0 +1,184 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Reviews from '../components/Reviews.astro';
+import { site } from '../data/site';
+import { ui, rich, fmt } from '../i18n/ui';
+import { r, type Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+const a = t.about;
+const h = t.home;
+const v = { years: site.years };
+const img = (n: string) => `/assets/img/${n}`;
+const journeyIcons = ['flower', 'mountain', 'layers'];
+const journeyImgs = ['IMG_8608-2.webp', '5-2.webp', 'IMG_8573-1-1-scaled.webp'];
+const processIcons = ['layers', 'sun', 'trend', 'drop'];
+const lines = a.h1.split('. ').map((line, i, arr) => (i < arr.length - 1 ? `${line}.` : line));
+const d = (i: number, step = 90) => `--d:${i * step}ms`;
+---
+
+<Base lang={lang} pageKey="about" title={a.title} description={a.description} ogImage="/assets/img/IMG_8608-2.webp">
+  <div class="wrap">
+    <section class="hero about-hero" aria-labelledby="about-title">
+      <img src={img('freepik_a-closeup-highangle-shot-_2844838785-1.webp')} alt="" width="1600" height="1000" fetchpriority="high" decoding="async" />
+      <div class="content">
+        <p class="eyebrow" data-reveal style="--d:80ms">{a.label}</p>
+        <h1 id="about-title" style="margin:0">
+          {lines.map((line, i) => (
+            <span class={i === 0 ? 'l1' : 'l2'} style={`display:block;--split-delay:${i * 420}ms`} data-split>{line}</span>
+          ))}
+        </h1>
+        <a class="btn btn-green btn-sq" href="#history" data-reveal style="--d:1000ms">{t.common.scroll}</a>
+      </div>
+    </section>
+
+    <section class="section box journey" id="history" aria-labelledby="history-title">
+      <div class="journey-head">
+        <h2 id="history-title" data-split>{a.historyTitle}</h2>
+        <p class="hint" data-reveal>{a.journeyHint}</p>
+      </div>
+      <div class="journey-main">
+        <div class="route">
+          <svg class="route-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <path class="base" pathLength="1" d="M50 4 L50 16.67 C 66 27, 34 39, 50 50 C 66 61, 34 73, 50 83.33 L50 96" />
+            <path class="prog" pathLength="1" d="M50 4 L50 16.67 C 66 27, 34 39, 50 50 C 66 61, 34 73, 50 83.33 L50 96" />
+          </svg>
+          {a.journey.map((st, i) => (
+            <article class="stop" id={`stop-${i}`}>
+              <button class="stop-node" type="button" aria-label={`${st.when}: ${st.t}`} aria-controls={`card-${i}`}><span class="node-ico"><Icon name={journeyIcons[i]} /></span><span class="node-label"><small>{st.when}</small><b>{st.t}</b></span></button>
+              <div class="stop-card" id={`card-${i}`} data-reveal>
+                <div class="stop-ph"><img src={img(journeyImgs[i])} alt="" loading="lazy" decoding="async" /><span class="stop-place"><Icon name="pin" />{st.place}</span></div>
+                <span class="num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                <p class="when">{st.when}</p>
+                <h3>{st.t}</h3>
+                <p set:html={rich(a.history[i])} />
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="route-stats">
+          <div class="mini-stat" data-reveal><b>{fmt(h.years.big, v)}</b><span>{h.years.t}</span></div>
+          <div class="mini-stat dark" data-reveal style="--d:100ms"><b>{h.acres.big}</b><span>{h.acres.t}</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section partners" aria-labelledby="process-title">
+      <div class="partners-head">
+        <h2 id="process-title" data-split>{a.processTitle}</h2>
+      </div>
+      <div class="partners-body">
+        <figure class="partner-photo" data-reveal>
+          <img src={img('IMG_8560-1.webp')} alt={a.processAlt} loading="lazy" decoding="async" />
+        </figure>
+        <div class="partner-grid">
+          {a.process.map((p, i) => (
+            <article class="partner-card" data-reveal style={d(i)}>
+              <span class="num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <span class="icon-circle"><Icon name={processIcons[i]} /></span>
+              <h3>{p.t.replace(/:$/, '')}</h3>
+              <p>{p.d}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section mv-box" aria-label={a.missionTitle + ' / ' + a.visionTitle}>
+      <div class="mv-media" data-reveal>
+        <img class="on" src={img('41117.webp')} alt={a.missionAlt} loading="lazy" decoding="async" />
+        <img src={img('magnific_fotografia-realista-de-un_2925955023.webp')} alt={a.visionAlt} loading="lazy" decoding="async" />
+      </div>
+      <div class="mv-body" data-reveal style="--d:100ms">
+        <div class="seg" role="tablist" aria-label={a.missionTitle + ' / ' + a.visionTitle}>
+          <button type="button" role="tab" id="mv-tab-0" aria-controls="mv-panel-0" aria-selected="true">{a.missionTitle}</button>
+          <button type="button" role="tab" id="mv-tab-1" aria-controls="mv-panel-1" aria-selected="false" tabindex="-1">{a.visionTitle}</button>
+        </div>
+        <div class="mv-panels">
+          <div class="mv-panel" role="tabpanel" id="mv-panel-0" aria-labelledby="mv-tab-0">
+            <h2>{a.missionTitle}</h2>
+            <p>{a.mission}</p>
+          </div>
+          <div class="mv-panel" role="tabpanel" id="mv-panel-1" aria-labelledby="mv-tab-1" hidden>
+            <h2>{a.visionTitle}</h2>
+            <p>{a.vision}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section box reviews" id="reviews">
+      <h2 data-split>{a.reviews}</h2>
+      <div data-reveal><Reviews lang={lang} /></div>
+      <p style="text-align:center;margin:28px 0 0" data-reveal><a class="btn btn-green" href={r('contact', lang)}>{t.nav.contact}</a></p>
+    </section>
+  </div>
+
+  <script>
+    // Desktop: pins work like a selector (one card at a time, short and centered).
+    // Mobile: the road fills as you scroll and pins light up when reached.
+    const route = document.querySelector<HTMLElement>('.route');
+    if (route) {
+      const stops = Array.from(route.querySelectorAll<HTMLElement>('.stop'));
+      const desk = window.matchMedia('(min-width: 801px)');
+      const setActive = (i: number) => {
+        route.dataset.active = String(i);
+        stops.forEach((s, n) => {
+          s.classList.toggle('is-active', n === i);
+          s.classList.toggle('is-before', n < i);
+          s.querySelector('.stop-node')?.setAttribute('aria-current', String(n === i));
+        });
+      };
+      const update = () => {
+        if (desk.matches) return;
+        const r = route.getBoundingClientRect();
+        const line = window.innerHeight * 0.62;
+        const py = Math.min(r.height, Math.max(0, line - r.top));
+        route.style.setProperty('--py', py + 'px');
+        stops.forEach((s) => {
+          const n = s.querySelector<HTMLElement>('.stop-node')!.getBoundingClientRect();
+          s.classList.toggle('reached', n.top + n.height / 2 < line);
+        });
+      };
+      setActive(0);
+      update();
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      stops.forEach((s, i) => {
+        s.querySelector('.stop-node')?.addEventListener('click', () => {
+          if (desk.matches) return setActive(i);
+          s.querySelector('.stop-card')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          s.classList.add('pulse');
+          setTimeout(() => s.classList.remove('pulse'), 1400);
+        });
+      });
+    }
+  </script>
+  <script>
+    // Mission / Vision selector (one at a time, fixed height).
+    const mvTabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.seg [role=tab]'));
+    const mvImgs = Array.from(document.querySelectorAll<HTMLElement>('.mv-media img'));
+    const mvPick = (i: number, focus = false) => {
+      mvTabs.forEach((tab, n) => {
+        const on = n === i;
+        tab.setAttribute('aria-selected', String(on));
+        tab.tabIndex = on ? 0 : -1;
+        const p = document.getElementById(tab.getAttribute('aria-controls') || '');
+        if (p) p.hidden = !on;
+        mvImgs[n]?.classList.toggle('on', on);
+        if (on && focus) tab.focus();
+      });
+    };
+    mvTabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => mvPick(i));
+      tab.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); mvPick((i + 1) % mvTabs.length, true); }
+      });
+    });
+  </script>
+</Base>

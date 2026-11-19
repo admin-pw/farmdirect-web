@@ -1,0 +1,11 @@
+---
+import VarietyDetail from '../../views/VarietyDetail.astro';
+import { varieties } from '../../data/varieties';
+
+export function getStaticPaths() {
+  return varieties.map((v) => ({ params: { slug: v.slug }, props: { v } }));
+}
+const { v } = Astro.props;
+---
+
+<VarietyDetail lang="en" v={v} />

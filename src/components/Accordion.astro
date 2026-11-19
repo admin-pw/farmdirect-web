@@ -1,0 +1,31 @@
+---
+import Icon from './Icon.astro';
+
+interface Item {
+  q: string;
+  a: string;
+}
+interface Props {
+  items: Item[];
+  light?: boolean;
+  schema?: boolean;
+}
+const { items, light = false, schema = true } = Astro.props;
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((i) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: i.a } })),
+};
+---
+
+<div class:list={['accordion', { light }]}>
+  {
+    items.map((i) => (
+      <details>
+        <summary>{i.q}<Icon name="chevron" /></summary>
+        <p>{i.a}</p>
+      </details>
+    ))
+  }
+</div>
+{schema && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}

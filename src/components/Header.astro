@@ -1,0 +1,125 @@
+---
+import Icon from './Icon.astro';
+import Flag from './Flag.astro';
+import { site } from '../data/site';
+import { ui } from '../i18n/ui';
+import { r, type Lang, type RouteKey } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  current?: RouteKey;
+  alt?: { en: string; es: string };
+}
+const { lang, current, alt } = Astro.props;
+const t = ui[lang];
+const other: Lang = lang === 'en' ? 'es' : 'en';
+const switchHref = alt ? alt[other] : r('home', other);
+const langNames = { en: 'English', es: 'Español' } as const;
+const items: { key: RouteKey; label: string }[] = [
+  { key: 'home', label: t.nav.home },
+  { key: 'about', label: t.nav.about },
+  { key: 'varieties', label: t.nav.varieties },
+];
+// Full-screen menu: the three main pages first (big), then the secondary ones.
+const bigLinks: { key: RouteKey; label: string }[] = [...items];
+---
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href={r('home', lang)} aria-label="Farm Direct">
+      <img src={site.assets.logoDark} alt="Farm Direct" width="190" height="62" />
+    </a>
+
+    <nav class="nav-pill" aria-label="Main">
+      {items.map((i) => <a href={r(i.key, lang)} aria-current={current === i.key ? 'page' : undefined}>{i.label}</a>)}
+    </nav>
+
+    <div class="bar-actions">
+      <a class="lang-circle" href={switchHref} hreflang={other} lang={other} aria-label={t.nav.switchLabel} title={langNames[other]}><Flag code={other === 'en' ? 'us' : 'es'} /></a>
+      <a class="btn btn-green" href={r('contact', lang)}>{t.nav.contact}</a>
+    </div>
+
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label={t.nav.menu}>
+      <Icon name="menu" />
+    </button>
+  </div>
+
+  <div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label={t.nav.menu} hidden>
+    <div class="mn-top">
+      <a class="mn-logo" href={r('home', lang)} aria-label="Farm Direct"><img src={site.assets.logoLight} alt="Farm Direct" width="150" height="50" /></a>
+      <button class="mn-close" type="button" aria-label={t.nav.close}><Icon name="close" /></button>
+    </div>
+
+    <nav class="mn-links" aria-label="Main">
+      {bigLinks.map((l, i) => (
+        <a href={r(l.key, lang)} style={`--i:${i}`} aria-current={current === l.key ? 'page' : undefined}>
+          <span class="n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <span class="t">{l.label}</span>
+          <Icon name="arrow" />
+        </a>
+      ))}
+    </nav>
+
+    <div class="mn-contact">
+      <p class="mn-label">{t.footer.contactDetails}</p>
+      <a class="btn btn-light mn-call" href={site.phoneHref} data-loc="menu"><Icon name="phone" />{site.phone}</a>
+      <a class="mn-mail" href={`mailto:${site.email}`} data-loc="menu"><Icon name="mail" />{site.email}</a>
+      <a class="btn btn-outline-light" href={r('contact', lang)}>{t.nav.contact} <Icon name="arrow" /></a>
+    </div>
+
+    <div class="mn-foot">
+      <div class="social">
+        <a href={site.social.facebook} target="_blank" rel="noopener" aria-label="Facebook"><Icon name="facebook" /></a>
+        <a href={site.social.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Icon name="instagram" /></a>
+        <a href={site.social.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+      </div>
+      <a class="lang-circle" href={switchHref} hreflang={other} lang={other} aria-label={t.nav.switchLabel} title={langNames[other]}><Flag code={other === 'en' ? 'us' : 'es'} /></a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const siteHeader = document.querySelector<HTMLElement>('.site-header');
+  const onScroll = () => siteHeader?.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const btn = document.querySelector<HTMLButtonElement>('.menu-btn');
+  const panel = document.getElementById('mobile-nav');
+  const closeBtn = panel?.querySelector<HTMLButtonElement>('.mn-close');
+  const root = document.documentElement;
+
+  const setOpen = (open: boolean) => {
+    if (!panel || !btn) return;
+    panel.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    root.classList.toggle('menu-open', open);
+    if (open) closeBtn?.focus();
+    else btn.focus();
+  };
+  btn?.addEventListener('click', () => setOpen(btn.getAttribute('aria-expanded') !== 'true'));
+  closeBtn?.addEventListener('click', () => setOpen(false));
+  // Close when a link inside the menu is used (same-page anchors keep the page open otherwise).
+  panel?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
+    panel.hidden = true;
+    btn?.setAttribute('aria-expanded', 'false');
+    root.classList.remove('menu-open');
+  }));
+  document.addEventListener('keydown', (e) => {
+    if (!panel || panel.hidden) return;
+    if (e.key === 'Escape') setOpen(false);
+    if (e.key === 'Tab') {
+      // Keep keyboard focus inside the open menu.
+      const f = Array.from(panel.querySelectorAll<HTMLElement>('a[href], button')).filter((el) => el.offsetParent !== null);
+      if (!f.length) return;
+      const first = f[0];
+      const last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  // If the window grows to desktop while the menu is open, close it and release the scroll lock.
+  window.matchMedia('(min-width: 901px)').addEventListener('change', (e) => {
+    if (e.matches && panel && !panel.hidden) setOpen(false);
+  });
+</script>

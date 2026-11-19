@@ -1,0 +1,63 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+import { ui, fmt } from '../i18n/ui';
+import { r, type Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+const year = new Date().getFullYear();
+const links = [
+  { key: 'home', label: t.nav.home },
+  { key: 'about', label: t.nav.about },
+  { key: 'varieties', label: t.nav.varieties },
+] as const;
+---
+
+<footer class="site-footer">
+  <div class="foot">
+    <div class="foot-cta" data-reveal>
+      <div>
+        <p class="foot-kicker">{t.common.orByPhone}</p>
+        <a class="foot-phone" href={site.phoneHref} data-loc="footer-cta">{site.phone}</a>
+      </div>
+      <div class="foot-actions">
+        <a class="btn btn-light" href={site.phoneHref} data-loc="footer-cta"><Icon name="phone" />{t.common.callSales}</a>
+        <a class="btn btn-outline-light" href={r('contact', lang)}>{t.nav.contact} <Icon name="arrow" /></a>
+      </div>
+    </div>
+
+    <div class="footer-cols">
+      <div class="foot-brand">
+        <a href={r('home', lang)} aria-label="Farm Direct"><img src={site.assets.logoLight} alt="Farm Direct" width="190" height="64" loading="lazy" /></a>
+        <p>{fmt(t.footer.about, { years: site.years })}</p>
+      </div>
+      <nav aria-label={t.footer.quickLinks}>
+        <h4>{t.footer.quickLinks}</h4>
+        <ul class="foot-links">
+          {links.map((l) => <li><a href={r(l.key, lang)}>{l.label}</a></li>)}
+        </ul>
+      </nav>
+      <div>
+        <h4>{t.footer.contactDetails}</h4>
+        <ul class="foot-contact">
+          <li><a href={`mailto:${site.email}`} data-loc="footer"><Icon name="mail" />{site.email}</a></li>
+          <li><a href={site.phoneHref} data-loc="footer"><Icon name="phone" />{site.phone}</a></li>
+        </ul>
+        <div class="social">
+          <a href={site.social.facebook} target="_blank" rel="noopener" aria-label="Facebook"><Icon name="facebook" /></a>
+          <a href={site.social.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Icon name="instagram" /></a>
+          <a href={site.social.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>{fmt(t.footer.rights, { year })}</span>
+      <span class="legal"><a href={r('privacy', lang)}>{t.footer.privacy}</a><a href={r('terms', lang)}>{t.footer.terms}</a></span>
+    </div>
+  </div>
+</footer>

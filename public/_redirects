@@ -1,0 +1,142 @@
+# Farm Direct: 301 redirects from the old WordPress site (Cloudflare Pages / Netlify `_redirects` format).
+# Order matters: first match wins. Review before launch against the final crawl of the old site.
+
+# --- Duplicates / aliases of kept pages
+/home/  /  301
+/home-2/  /  301
+/home-3/  /  301
+/about/  /about-us/  301
+/about%20us/  /about-us/  301
+/Varieties/  /varieties/  301
+/contact-us/  /contact/  301
+/contact-us  /contact/  301
+/contactus  /contact/  301
+/contactme  /contact/  301
+/get-in-touch  /contact/  301
+/reach-us  /contact/  301
+/talk-to-us  /contact/  301
+/pages/contact-us  /contact/  301
+/reviews/  /about-us/#reviews  301
+/rooted-in-legacy/  /about-us/  301
+/our-story  /about-us/  301
+/our-story/  /about-us/  301
+
+# --- Lead pages
+/new-customer-application-form/  /apply/  301
+/new-customer-application-form  /apply/  301
+/event-planner-application  /apply/  301
+/priority-order  /apply/  301
+/priority-order/  /apply/  301
+/professional-special-order  /apply/  301
+/thank-you-page/  /thank-you/  301
+/thank-you-page  /thank-you/  301
+/thank-you-page-dna  /thank-you/  301
+/thank-you-page-dna/  /thank-you/  301
+/thank-you-page-ilb/  /thank-you/  301
+/consistency-trust-thank-you/  /thank-you/  301
+/curated-canvas-thank-you/  /thank-you/  301
+/curated-canvas-thank-you  /thank-you/  301
+
+# --- Old marketing funnels (inactive) -> closest live page
+/consistency-trust-mofu/  /apply/  301
+/consistency-trust-bofu/  /apply/  301
+/consistency-trust-op/  /apply/  301
+/consistency-trust-bofu-2/  /apply/  301
+/consistency-trust-bofy  /apply/  301
+/consistency-you-can-trust-mofu  /apply/  301
+/landing-mofu  /apply/  301
+/lock-your-price--a4a2b  /apply/  301
+/dna-farm-direct/  /catalog/  301
+/dna-farm-direct+/  /catalog/  301
+/dna-farm-direct  /catalog/  301
+/adn-farm-direct  /catalog/  301
+/adn-farm-direct/  /catalog/  301
+/adn-farm-direct-2  /catalog/  301
+/adn-farm-direct-2/  /catalog/  301
+/ecuadorian-standard/  /catalog/  301
+/ecuadorian-standart  /catalog/  301
+/farm-direct-catalog  /catalog/  301
+/farm-direct-catalog/  /catalog/  301
+/catalogo  /catalog/  301
+/catalogue  /catalog/  301
+/explore-all-flowers  /varieties/  301
+/the-invisible-logistics-of-beauty-1/  /  301
+/the-invisible-logistics-of-beauty-2/  /  301
+/curated-canvas/  /  301
+/curated/canvas  /  301
+/urgente-cambios-en-campana  /  301
+
+# --- Shop, cart and account (online store retired; sales are by phone)
+/shop/  /varieties/  301
+/shop  /varieties/  301
+/webshop  /varieties/  301
+/cart/  /varieties/  301
+/checkout/  /contact/  301
+/wishlist/  /varieties/  301
+/my-account/*  /  301
+/my-account/  /  301
+/product-category/wholesale-bunch-roses/  /varieties/#roses  301
+/product-category/spray-roses/  /varieties/#spray-roses  301
+/product-category/garden-roses/  /varieties/#garden-roses  301
+/product-category/alstroemerias/  /varieties/#alstroemeria  301
+/color/*  /varieties/  301
+
+# --- Legal
+/privacy-policy  /privacy/  301
+/privacy-policy/  /privacy/  301
+/terms-of-service  /terms/  301
+/terms-of-service/  /terms/  301
+/terms-and-conditions  /terms/  301
+
+# --- Blog / author archives / WordPress leftovers
+/hello-world/  /  301
+/blog  /  301
+/blog/*  /  301
+/page/*  /varieties/  301
+/author/*  /  301
+/feed  /  301
+/wp-admin/*  /  301
+/wp-login.php  /  301
+
+# --- Holiday Roses landing is archived (not part of the site): keep old campaign/email links alive
+/holiday-roses/  /varieties/  301
+/holiday-roses  /varieties/  301
+/holiday-roses/*  /varieties/  301
+/holiday-catalog  /varieties/  301
+/holiday-catalog/  /varieties/  301
+/seasonal-catalog  /varieties/  301
+/seasonal-catalog/  /varieties/  301
+/es/rosas-navidenas/  /es/variedades/  301
+/es/rosas-navidenas  /es/variedades/  301
+
+# --- Old WooCommerce product URLs -> new variety pages
+/product/white-roses/  /varieties/  301
+/product/red-roses/  /varieties/  301
+/product/alstroemerias/  /varieties/  301
+/product/garden-roses/  /varieties/  301
+/product/spray-roses-bicolor-red/  /varieties/  301
+/product/spray-roses-orange/  /varieties/  301
+/product/spray-roses-yellow/  /varieties/  301
+/product/spray-roses-lavender/  /varieties/  301
+/product/spray-roses-peach/  /varieties/  301
+/product/spray-roses-hot-pink/  /varieties/  301
+/product/cream-roses/  /varieties/  301
+/product/bi-color-yellow-roses/  /varieties/  301
+/product/bi-color-pink-roses/  /varieties/  301
+/product/bi-color-orange/  /varieties/  301
+/product/terracotta-roses/  /varieties/  301
+/product/green-roses/  /varieties/  301
+/product/medium-pink-roses/  /varieties/  301
+/product/hot-pink-roses/  /varieties/  301
+/product/lavender-roses/  /varieties/  301
+/product/light-pink-roses/  /varieties/  301
+/product/orange-roses/  /varieties/  301
+/product/yellow-roses/  /varieties/  301
+/product/spray-roses-light-pink/  /varieties/  301
+/product/spray-roses-white/  /varieties/  301
+/product/spray-roses-red/  /varieties/  301
+/product/salmon-roses/  /varieties/  301
+/product/coral-roses/  /varieties/  301
+/product/*  /varieties/  301
+
+# --- Fallback: Cloudflare Pages serves /404.html automatically.

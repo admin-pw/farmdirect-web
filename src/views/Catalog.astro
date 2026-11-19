@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+import { ui } from '../i18n/ui';
+import { r, type Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+const c = t.catalog;
+---
+
+<Base lang={lang} pageKey="catalog" title={c.title} description={c.description}>
+  <div class="wrap">
+    <section class="page-box" style="min-height:clamp(300px,50svh,480px)">
+      <div>
+        <h1>{c.h1}</h1>
+        <p style="max-width:56ch;margin:0 auto 24px">{c.sub}</p>
+        <a class="btn btn-green btn-sq" href="/catalog/flipbook/" target="_blank" rel="noopener" data-track="catalog_open" data-loc="catalog">{c.open}</a>
+        <p style="font-size:.8rem;color:var(--soft);margin:10px 0 0">{c.pdfHint}</p>
+      </div>
+    </section>
+    <section class="section callout">
+      <h3>{c.helpTitle}</h3>
+      <p>{c.helpSub}</p>
+      <a class="big-phone" href={site.phoneHref} data-loc="catalog">{site.phone}</a>
+      <a class="btn btn-outline-light" href={r('apply', lang)}>{t.common.requestQuote} <Icon name="arrow" /></a>
+    </section>
+  </div>
+</Base>

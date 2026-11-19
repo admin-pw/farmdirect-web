@@ -1,0 +1,230 @@
+---
+import '@fontsource-variable/montserrat';
+import '@fontsource/cinzel/400.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+import { ui } from '../i18n/ui';
+import { routes, type Lang, type RouteKey } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  pageKey?: RouteKey;
+  alternates?: { en: string; es: string };
+  noindex?: boolean;
+  ogImage?: string;
+  jsonLd?: Record<string, unknown>[];
+}
+
+const { lang, title, description, pageKey, alternates, noindex = false, ogImage = '/assets/img/Wedding-season.webp', jsonLd = [] } = Astro.props;
+const t = ui[lang];
+const alt = alternates ?? (pageKey ? routes[pageKey] : undefined);
+const abs = (p: string) => (p.startsWith('http') ? p : new URL(p, site.domain).href);
+const canonical = abs(Astro.url.pathname);
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  url: site.domain,
+  logo: abs(site.assets.logoDark),
+  foundingDate: String(site.since),
+  sameAs: Object.values(site.social),
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      telephone: site.phone,
+      email: site.email,
+      areaServed: 'US',
+      availableLanguage: ['English', 'Spanish'],
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {
+      alt && (
+        <>
+          <link rel="alternate" hreflang="en" href={abs(alt.en)} />
+          <link rel="alternate" hreflang="es" href={abs(alt.es)} />
+          <link rel="alternate" hreflang="x-default" href={abs(alt.en)} />
+        </>
+      )
+    }
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={abs(ogImage)} />
+    <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#345651" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/assets/fonts/biggerdisplay.otf" as="font" type="font/otf" crossorigin />
+    <script is:inline>
+      // Motion is opt-in: elements are only hidden for animation when JS is running.
+      // If the motion script has not finished within 3s, show everything as-is.
+      document.documentElement.classList.add('js');
+      setTimeout(function () {
+        if (document.documentElement.dataset.motion !== 'ready') document.documentElement.classList.add('motion-fallback');
+      }, 3000);
+    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(organization)} />
+    {jsonLd.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
+    {
+      site.gtmId && (
+        <script
+          is:inline
+          set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${site.gtmId}');`}
+        />
+      )
+    }
+  </head>
+  <body>
+    {
+      site.gtmId && (
+        <noscript>
+          <iframe src={`https://www.googletagmanager.com/ns.html?id=${site.gtmId}`} height="0" width="0" style="display:none;visibility:hidden" />
+        </noscript>
+      )
+    }
+    <a class="skip" href="#main">{t.nav.skip}</a>
+    <Header lang={lang} current={pageKey} alt={alt} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+    <a class="callfab" href={site.phoneHref} data-loc="fab"><Icon name="phone" />{t.nav.call}</a>
+    <script>
+      // Text + reveal animations. [data-split] headings rise letter by letter; [data-reveal] blocks fade up.
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelectorAll<HTMLElement>('[data-split]').forEach((el) => {
+        const text = (el.textContent || '').trim();
+        if (!text) return;
+        const vis = document.createElement('span');
+        vis.className = 'split-vis';
+        vis.setAttribute('aria-hidden', 'true');
+        let i = 0;
+        const words = text.split(/\s+/);
+        words.forEach((word, wi) => {
+          const w = document.createElement('span');
+          w.className = 'w';
+          for (const ch of word) {
+            const c = document.createElement('span');
+            c.className = 'ch';
+            c.style.setProperty('--i', String(i++));
+            c.textContent = ch;
+            w.appendChild(c);
+          }
+          vis.appendChild(w);
+          if (wi < words.length - 1) {
+            vis.appendChild(document.createTextNode(' '));
+            i++;
+          }
+        });
+        const sr = document.createElement('span');
+        sr.className = 'sr-only';
+        sr.textContent = text;
+        el.textContent = '';
+        el.append(sr, vis);
+        el.classList.add('is-split');
+      });
+      const targets = document.querySelectorAll('[data-split], [data-reveal]');
+      if (reduce || !('IntersectionObserver' in window)) {
+        targets.forEach((t) => t.classList.add('in'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) =>
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add('in');
+                io.unobserve(e.target);
+              }
+            }),
+          { threshold: 0.01, rootMargin: '0px 0px -6% 0px' },
+        );
+        // Above-the-fold elements start right away (no wait for the first observer callback);
+        // everything else is revealed on scroll.
+        void document.body.offsetWidth; // flush styles so the transition starts from the hidden state
+        targets.forEach((t) => {
+          const box = t.getBoundingClientRect();
+          if (box.bottom > 0 && box.top < window.innerHeight * 0.94) t.classList.add('in');
+          else io.observe(t);
+        });
+      }
+      // Count-up numbers (final text is already in the HTML; we only animate it when scrolled into view).
+      if (!reduce && 'IntersectionObserver' in window) {
+        const co = new IntersectionObserver((es) =>
+          es.forEach((e) => {
+            if (!e.isIntersecting) return;
+            co.unobserve(e.target);
+            const el = e.target as HTMLElement;
+            const end = Number(el.dataset.count);
+            const pre = el.dataset.prefix || '';
+            const t0 = performance.now();
+            const step = (now: number) => {
+              const k = Math.min(1, (now - t0) / 1400);
+              el.textContent = pre + Math.round(end * (1 - Math.pow(1 - k, 3)));
+              if (k < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+          }),
+        { threshold: 0.5 });
+        document.querySelectorAll('[data-count]').forEach((el) => co.observe(el));
+      }
+      // Swipeable rows on mobile: one full card per view, with dots (hidden on desktop by CSS).
+      document.querySelectorAll<HTMLElement>('.origin-grid, .partner-grid, .cat-grid').forEach((row) => {
+        const cards = Array.from(row.children) as HTMLElement[];
+        if (cards.length < 2) return;
+        const dots = document.createElement('div');
+        dots.className = 'snap-dots';
+        dots.setAttribute('aria-hidden', 'true');
+        const btns = cards.map((_card, i) => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.tabIndex = -1;
+          b.addEventListener('click', () => row.scrollTo({ left: i * (cards[0].offsetWidth + 10), behavior: 'smooth' }));
+          dots.appendChild(b);
+          return b;
+        });
+        row.after(dots);
+        const update = () => {
+          const at = Math.round(row.scrollLeft / Math.max(1, cards[0].offsetWidth + 10));
+          btns.forEach((b, i) => b.setAttribute('aria-current', String(i === Math.min(at, cards.length - 1))));
+        };
+        row.addEventListener('scroll', update, { passive: true });
+        update();
+      });
+      document.documentElement.dataset.motion = 'ready';
+    </script>
+    <script>
+      // Minimal, consent-free event layer: GTM (if configured) reads window.dataLayer.
+      const w = window as unknown as { dataLayer: Record<string, unknown>[] };
+      w.dataLayer = w.dataLayer || [];
+      document.addEventListener('click', (e) => {
+        const a = (e.target as HTMLElement | null)?.closest?.('a');
+        if (!a) return;
+        const href = a.getAttribute('href') || '';
+        const loc = (a as HTMLElement).dataset.loc || 'page';
+        if (href.startsWith('tel:')) w.dataLayer.push({ event: 'click_to_call', link_location: loc });
+        else if (href.startsWith('mailto:')) w.dataLayer.push({ event: 'click_email', link_location: loc });
+        else if ((a as HTMLElement).dataset.track) w.dataLayer.push({ event: (a as HTMLElement).dataset.track, link_location: loc });
+      });
+    </script>
+  </body>
+</html>

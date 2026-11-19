@@ -1,0 +1,895 @@
+[
+ {
+  "id": 1927,
+  "slug": "white-roses",
+  "name": "White Roses",
+  "category": "Wholesale Bunch Roses",
+  "short": "",
+  "desc": "White, an inherently positive color, is associated with purity, innocence, goodness, safety, brilliance, illumination, understanding, cleanliness, faith, beginnings, sincerity, protection, softness, and perfection. Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders",
+  "priceFrom": 67.5,
+  "priceTo": 168.75,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_697c54f03c6d49d39b3503067bf29082mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_697c54f03c6d49d39b3503067bf29082mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_9f151cc2705e49019b6abc3d375725abmv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_41dd723e494c475c9a965f10d2accfcemv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "125 Roses",
+    "50 Roses"
+   ],
+   "Variety": [
+    "Blizzard",
+    "Eskimo",
+    "Mondial",
+    "Playa Blanca",
+    "Polar Star",
+    "Polo",
+    "Proud",
+    "Snowy Jewel",
+    "Tibet",
+    "Vendela"
+   ]
+  }
+ },
+ {
+  "id": 1908,
+  "slug": "red-roses",
+  "name": "Red Roses",
+  "category": "Wholesale Bunch Roses",
+  "short": "",
+  "desc": "One of the most universal of all symbols, the red rose represents true love. It has also appeared throughout history and across cultures as both a political and religious symbol. Perfect for all occasions. Fresh from farm, deliver to your door. Free Shipping in All Orders",
+  "priceFrom": 77.5,
+  "priceTo": 193.75,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_e063308c42604bca96bd4df7d0de6f32mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_46a8a927eb974429a8447cf902a09465mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_d100ef8e84284d6c9b3496bbcf4d45a3mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_4c9ce517355e4abf922934bec97644f6mv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "125 Roses",
+    "50 Roses"
+   ],
+   "Variety": [
+    "Explorer",
+    "Freedom"
+   ]
+  }
+ },
+ {
+  "id": 1751,
+  "slug": "alstroemerias",
+  "name": "Alstroemerias",
+  "category": "Alstroemerias",
+  "short": "",
+  "desc": "Alstroemerias, also known as Peruvian lilies, are a beautiful and versatile flower perfect for event planners and florists. With their range of vibrant colors and unique markings, they make a stunning addition to any floral arrangement or bouquet. These long-lasting flowers are perfect for creating eye-catching centerpieces, bridal bouquets, and corporate event displays. Their delicate petals and long, sturdy stems make them a popular choice for florists looking to create elegant and timeless floral designs. Whether for weddings, parties, or everyday arrangements, alstroemerias add a touch of grace and sophistication to any event or floral creation.",
+  "priceFrom": 48.0,
+  "priceTo": 108.0,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_9dff0e624a474f38911de9c5a43d642dmv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_8748df032de54d4d89131c0c2f7ac72fmv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "120 Roses",
+    "60 Roses"
+   ],
+   "Variety": [
+    "Amposta",
+    "As Romance",
+    "Bounty",
+    "Cheesecake",
+    "Cinnamon",
+    "Copacabana",
+    "Dubai",
+    "Jaffa",
+    "Labonita",
+    "Okinawa",
+    "Pierrot",
+    "Sweetheart",
+    "Whistler"
+   ],
+   "Color": [
+    "Bi Color Orange",
+    "Bi Color Pink",
+    "Hot Pink",
+    "Lavender",
+    "Light Pink",
+    "Orange",
+    "Red",
+    "White",
+    "Yellow"
+   ]
+  }
+ },
+ {
+  "id": 1655,
+  "slug": "garden-roses",
+  "name": "Garden Roses",
+  "category": "Garden Roses",
+  "short": "",
+  "desc": "Introducing our Garden Roses that will elevate any garden or floral arrangement. With its beautiful combination of vibrant orange and pink hues, this flower will add a pop of color and warmth to any space. Perfect for all occasions. Fresh from farm, deliver to your door. Free Shipping in All Orders",
+  "priceFrom": 82.5,
+  "priceTo": 206.25,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/64dd8b_f6ec8b76319d48b1ab1122f60139861fmv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_97754549727d4a6988ffbdf2bc5a8d59mv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "125 Roses",
+    "50 Roses"
+   ],
+   "Variety": [
+    "Candlelight",
+    "Candy Xpression",
+    "Carpe Diem",
+    "Country Blues",
+    "Free Spirit",
+    "Hearts",
+    "Kahala",
+    "Moonstone",
+    "Pink Xpression",
+    "Princess Crown",
+    "Queen Berry",
+    "Queens Crown",
+    "Sunset Xpression",
+    "Wild Esperance",
+    "Wild Spirit"
+   ]
+  }
+ },
+ {
+  "id": 1639,
+  "slug": "spray-roses-bicolor-red",
+  "name": "Spray Roses Bicolor Red",
+  "category": "Spray Roses",
+  "short": "",
+  "desc": "Spray roses have short individual stems on a single larger stem. Use miniature spray roses for wrist corsages, centerpieces and other small scale arrangements. You can combine spray roses with other flowers and greenery in bigger bouquets for a thick and lush appearance Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders 5-7 Blooms per Stem Vase Life: 8 – 12 Days",
+  "priceFrom": 115.0,
+  "priceTo": 144.0,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_c87376cf1d0b4e58a22b2638460f13a3mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_e1bf5285ef1b4d6eb78252411dcd62e4mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_58adb0c69c54499d971f510025ff2270mv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "120 Roses",
+    "150 Roses"
+   ],
+   "Variety": [
+    "Red Hero",
+    "Salsa"
+   ]
+  }
+ },
+ {
+  "id": 1623,
+  "slug": "spray-roses-orange",
+  "name": "Spray Roses Orange",
+  "category": "Spray Roses",
+  "short": "5-7 Blooms per Stem Vase Life: 8 – 12 Days",
+  "desc": "Spray roses have short individual stems on a single larger stem. Use miniature spray roses for wrist corsages, centerpieces and other small scale arrangements. You can combine spray roses with other flowers and greenery in bigger bouquets for a thick and lush appearance Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders",
+  "priceFrom": 85.0,
+  "priceTo": 127.5,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_b75d9448f5d74687b00b5235778706a4mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_ed65425b3d0a425b829449be62c14bafmv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_c1bd2c7ee9b645df86cb8c27b0d16b5emv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "120 Roses",
+    "150 Roses"
+   ],
+   "Variety": [
+    "Babe",
+    "Mambo"
+   ]
+  }
+ },
+ {
+  "id": 1610,
+  "slug": "spray-roses-yellow",
+  "name": "Spray Roses Yellow",
+  "category": "Spray Roses",
+  "short": "",
+  "desc": "Spray roses have short individual stems on a single larger stem. Use miniature spray roses for wrist corsages, centerpieces and other small scale arrangements. You can combine spray roses with other flowers and greenery in bigger bouquets for a thick and lush appearance Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders",
+  "priceFrom": 85.0,
+  "priceTo": 127.5,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_523cbc5fc9de421eb7226cccc6f34846mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_a27b25251c954fdf9f472c46a4d289aamv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_a8e31a50e946424495a6ec706076e08dmv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "120 Roses",
+    "150 Roses"
+   ],
+   "Variety": [
+    "Sun City",
+    "Yellow Babe"
+   ]
+  }
+ },
+ {
+  "id": 1594,
+  "slug": "spray-roses-lavender",
+  "name": "Spray Roses Lavender",
+  "category": "Spray Roses",
+  "short": "",
+  "desc": "Spray roses have short individual stems on a single larger stem. Use miniature spray roses for wrist corsages, centerpieces and other small scale arrangements. You can combine spray roses with other flowers and greenery in bigger bouquets for a thick and lush appearance Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders",
+  "priceFrom": 85.0,
+  "priceTo": 127.5,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_a4400a1dc6be45f9837a68c9cdaaeb97mv2.png",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_58350a3336834be693adcb42d4f2f7dfmv2.png",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_bea75f576bf14d5db256e842e7a7cf74mv2.png"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "120 Roses",
+    "150 Roses"
+   ],
+   "Variety": [
+    "Purple Sky",
+    "Silver Mikado"
+   ]
+  }
+ },
+ {
+  "id": 1585,
+  "slug": "spray-roses-peach",
+  "name": "Spray Roses Peach",
+  "category": "Spray Roses",
+  "short": "",
+  "desc": "Spray roses have short individual stems on a single larger stem. Use miniature spray roses for wrist corsages, centerpieces and other small scale arrangements. You can combine spray roses with other flowers and greenery in bigger bouquets for a thick and lush appearance Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders",
+  "priceFrom": 85.0,
+  "priceTo": 127.5,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_cffc98e7c6b14333ac9b9b83420b18fcmv2.png",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_07335d22f36d42dbbf3cda5068964dcbmv2.png"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "120 Roses",
+    "150 Roses"
+   ],
+   "Variety": [
+    "Ilse"
+   ]
+  }
+ },
+ {
+  "id": 1569,
+  "slug": "spray-roses-hot-pink",
+  "name": "Spray Roses Hot Pink",
+  "category": "Spray Roses",
+  "short": "",
+  "desc": "Spray roses have short individual stems on a single larger stem. Use miniature spray roses for wrist corsages, centerpieces and other small scale arrangements. You can combine spray roses with other flowers and greenery in bigger bouquets for a thick and lush appearance Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders",
+  "priceFrom": 85.0,
+  "priceTo": 127.5,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_641a388523b74ab4af4b7f9d4c45fb14mv2_d_1497_1497_s_2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_abc58166baaf4fd59aaa05afe9e6ca0emv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_0a6d17b9ef544d65a5a41932b5fa2e25mv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "120 Roses",
+    "150 Roses"
+   ],
+   "Variety": [
+    "Hot Pink Folies",
+    "Lovely Lydia"
+   ]
+  }
+ },
+ {
+  "id": 1495,
+  "slug": "cream-roses",
+  "name": "Cream Roses",
+  "category": "Wholesale Bunch Roses",
+  "short": "",
+  "desc": "The Cream Rose, although similar to white roses, have a totally different meaning. They are said to represent charm, thoughtfulness and gracefulness. Cream Colored roses also represent richness and perfection.Cream Roses would be great for letting someone know you care, without romantic intentions. Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders",
+  "priceFrom": 62.5,
+  "priceTo": 156.25,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_95425fa0b82f47f89e57217747716054mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_801db09bcc6e414592a0ec872d5e3f0cmv2-1.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_d19814f9706d4bfd80bf0274b3af61b1mv2-1.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "125 Roses",
+    "50 Roses"
+   ],
+   "Variety": [
+    "Pompei",
+    "Quicksand",
+    "Sahara",
+    "Sandy"
+   ]
+  }
+ },
+ {
+  "id": 1441,
+  "slug": "bi-color-yellow-roses",
+  "name": "Bi-Color Yellow Roses",
+  "category": "Wholesale Bunch Roses",
+  "short": "",
+  "desc": "Yellow is a color associated with abundance and prosperity, luxury and quality, prestige and sophistication, value and elegance. And if we mix with red we have a sophisticated love. And even with orange, we get an amazing creation of pure joy and warmth. ​Perfect for all occasions. Fresh from farm, deliver to your door. Free Shipping in All Orders",
+  "priceFrom": 47.5,
+  "priceTo": 118.75,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_7e4d85734fdc48d7994d8a8242f3bed9mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_88aea771316e4f509fadb6a71b9f27b9mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_e9cb7f9098784742b8d3764bef22d682mv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "125 Roses",
+    "50 Roses"
+   ],
+   "Variety": [
+    "High &amp; Magic",
+    "Hot Merengue",
+    "Silantoi"
+   ]
+  }
+ },
+ {
+  "id": 1409,
+  "slug": "bi-color-pink-roses",
+  "name": "Bi-Color Pink Roses",
+  "category": "Wholesale Bunch Roses",
+  "short": "",
+  "desc": "Pink is such a delightful color that in all its hues can go perfectly coordinated with other colors like cream, white and purple. Color is a form of non verbal communication. It is not a static energy and its meaning can change from one day to the next with any individual – it all depends on what energy they are expressing at that point in time. Perfect for all occasions. Fresh from farm, deliver to your door! Free Shipping in All Orders.",
+  "priceFrom": 72.5,
+  "priceTo": 181.25,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_e9a1637c12754a919a2e25d2bf11490emv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_04dd3209b21c4c1993b5ba79a356f2eamv2-1.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_cad3af449c0e4a81bad685ba28d1d9e9mv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "125 Roses",
+    "50 Roses"
+   ],
+   "Variety": [
+    "Cezzane",
+    "Esperante",
+    "Magic Times",
+    "Sweet Berry"
+   ]
+  }
+ },
+ {
+  "id": 1399,
+  "slug": "bi-color-orange",
+  "name": "Bi-Color Orange",
+  "category": "Wholesale Bunch Roses",
+  "short": "",
+  "desc": "The color psychology of orange is optimistic and uplifting, rejuvenating our spirit. In fact orange is so optimistic and uplifting that we should all find ways to use it in our everyday life, even if it is just an orange colored pen that we use. Perfect for all occasions. Fresh from farm, deliver to your door. Free Shipping in All Orders",
+  "priceFrom": 47.5,
+  "priceTo": 118.75,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_7c987f16a7874c6eba4b3e91d6a991admv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_8456978487994578a26d4614fec82559mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_f5efd28b5a7f4e16b67c2e6d702b59f6mv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "125 Roses",
+    "50 Roses"
+   ],
+   "Variety": [
+    "Cherry Brandy"
+   ]
+  }
+ },
+ {
+  "id": 1376,
+  "slug": "terracotta-roses",
+  "name": "Terracotta Roses",
+  "category": "Wholesale Bunch Roses",
+  "short": "",
+  "desc": "Earth tone, is a color scheme that draws from a color palette of browns, tans, warm grays, and greens. The colors in an earth tone scheme are muted and flat in an emulation of the natural colors found in trees and rocks. Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders",
+  "priceFrom": 47.5,
+  "priceTo": 118.75,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_25e98fd1d1f34313ac80ee92565bae80mv2-1.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_9f23f31129b14f489033c575051f7146mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_c88c3d0a20ac4f90b053a91dcfced80bmv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_e5cd7f52e659481996d486b3371f951cmv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "125 Roses",
+    "50 Roses"
+   ],
+   "Variety": [
+    "Coffee Break",
+    "Leonidas",
+    "Matilda"
+   ]
+  }
+ },
+ {
+  "id": 1358,
+  "slug": "green-roses",
+  "name": "Green Roses",
+  "category": "Wholesale Bunch Roses",
+  "short": "",
+  "desc": "The color green relates to balance and harmony. From a color psychology perspective, it is the great balancer of the heart and the emotions, creating equilibrium between the head and the heart. Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders.",
+  "priceFrom": 47.5,
+  "priceTo": 118.75,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_4253d9bc9256456297acc493648ea724mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_5c0acb5828be4710bdced48df152b699mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_f05cb4024dac4723b353d3f21ce99d10mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_629e0c7e31c3413a883c842932c3d293mv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "125 Roses",
+    "50 Roses"
+   ],
+   "Variety": [
+    "Green Romance",
+    "Lemonade"
+   ]
+  }
+ },
+ {
+  "id": 1337,
+  "slug": "medium-pink-roses",
+  "name": "Medium Pink Roses",
+  "category": "Wholesale Bunch Roses",
+  "short": "",
+  "desc": "Pink is the official color for little girls and represents sugar and spice and everything nice. Pink is the sweet side of the color red. While the color red stirs up passion, aggression, and action, large amounts of the color pink can actually create physical weakness Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders",
+  "priceFrom": 67.5,
+  "priceTo": 168.75,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_35ead552b4ce44e9a58f9c10e724b5admv2-2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_0d448778c4b249f5907e370967fdb963mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_e9f105c02095413db748a4bfb4a690dbmv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "125 Roses",
+    "50 Roses"
+   ],
+   "Variety": [
+    "Blessing",
+    "Luciano",
+    "Priceless",
+    "Sweet Unique"
+   ]
+  }
+ },
+ {
+  "id": 1297,
+  "slug": "hot-pink-roses",
+  "name": "Hot Pink Roses",
+  "category": "Wholesale Bunch Roses",
+  "short": "",
+  "desc": "Both red and pink represent love. The color red represents heat and passion, while the color pink represents romance and charm. Hot pink is used to communicate playfulness, while light pink is used to communicate tenderness. Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders",
+  "priceFrom": 67.5,
+  "priceTo": 168.75,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_d59754afcf164946aa0cd000209d0379mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_d59754afcf164946aa0cd000209d0379mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_5cb34e731d554c44b4c59db7db9267b1mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_f18f294777214f278499c57384f0ac62mv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "125 Roses",
+    "50 Roses"
+   ],
+   "Variety": [
+    "Full Monty",
+    "Hot Explorer",
+    "Hot Lady",
+    "Pink Floyd",
+    "Sweet Memory",
+    "Topaz"
+   ]
+  }
+ },
+ {
+  "id": 1249,
+  "slug": "lavender-roses",
+  "name": "Lavender Roses",
+  "category": "Wholesale Bunch Roses",
+  "short": "",
+  "desc": "Purple and its lighter lavender shades have a special, almost sacred, place in nature, where lavender, orchid, lilac and violet flowers are often delicate and considered precious. Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders",
+  "priceFrom": 62.5,
+  "priceTo": 168.75,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_27199d807a494305828516e95fae6733mv2-1.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_7d6607ab94494bcfac90550af5e06bdfmv2-1.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_9d90d50b9f7c422dbb435bcc22a5f7f1mv2-1.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_27199d807a494305828516e95fae6733mv2-1.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "125 Roses",
+    "50 Roses"
+   ],
+   "Variety": [
+    "Amnesia",
+    "Cool Water",
+    "Deep Purple",
+    "Early Grey",
+    "Meli",
+    "Moody Blues",
+    "Ocean Song"
+   ]
+  }
+ },
+ {
+  "id": 1194,
+  "slug": "light-pink-roses",
+  "name": "Light Pink Roses",
+  "category": "Wholesale Bunch Roses",
+  "short": "",
+  "desc": "Pink, a delicate color that means sweet, nice, playful, cute, romantic, charming, feminine, and tenderness, is associated with bubble gum, FLOWERS, babies, little girls, cotton candy, and sweetness. Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders",
+  "priceFrom": 67.5,
+  "priceTo": 168.75,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_7399aee4150742c5ac779c08196d32e2mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/09/95a983_185bc0ed85724c938c59748983f8a660mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/09/95a983_a4971ab3b4e74fa6a475f6ac61e849a6mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/09/95a983_589dac0038894bf59462275d348f8a96mv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "125 Roses",
+    "50 Roses"
+   ],
+   "Variety": [
+    "Faith",
+    "Frutetto",
+    "Geraldine",
+    "Hermosa",
+    "Jessica",
+    "Mother of Pearl",
+    "Nina",
+    "Pink Mondial",
+    "Secret Garden",
+    "Senorita",
+    "Sweet Akito"
+   ]
+  }
+ },
+ {
+  "id": 1148,
+  "slug": "orange-roses",
+  "name": "Orange Roses",
+  "category": "Wholesale Bunch Roses",
+  "short": "",
+  "desc": "Orange is associated with meanings of joy, warmth, heat, sunshine, enthusiasm, creativity, success, encouragement, change, determination, health, stimulation, happiness, fun and enjoyment. Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders",
+  "priceFrom": 55.0,
+  "priceTo": 137.5,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_9cc5fb7fde9a488d8eec78d186898f7bmv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_abf49b6e1a1842928ae2c8914e85f028mv2.png",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_30c6c13874d54bafb8d6b50817a2baccmv2.png",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_9cc5fb7fde9a488d8eec78d186898f7bmv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "125 Roses",
+    "50 Roses"
+   ],
+   "Variety": [
+    "Cayenne",
+    "Confidential",
+    "Dragon Tail",
+    "Orange Crush"
+   ]
+  }
+ },
+ {
+  "id": 1101,
+  "slug": "yellow-roses",
+  "name": "Yellow Roses",
+  "category": "Wholesale Bunch Roses",
+  "short": "",
+  "desc": "Yellow, the color of sunshine, hope, and happiness. On one hand yellow stands for freshness, happiness, positivity, clarity, energy, optimism, enlightenment, remembrance, intellect, honor, loyalty, and joy. Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders",
+  "priceFrom": 55.0,
+  "priceTo": 137.5,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_4690487295f64c42b99fe6eec249cce3mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_9740f5e10a6143d08e2e0c1c6c24eb65mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_8bfa3faa2a084226a5dbb61852e12ed5mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_fb6f5886d919480cb700c8975c10d168mv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "125 Roses",
+    "50 Roses"
+   ],
+   "Variety": [
+    "Bikini",
+    "Brighton",
+    "Goldfinch",
+    "Lighthouse",
+    "Momentum",
+    "Super Sun",
+    "Tara"
+   ]
+  }
+ },
+ {
+  "id": 802,
+  "slug": "spray-roses-light-pink",
+  "name": "Spray Roses Light Pink",
+  "category": "Spray Roses",
+  "short": "5-7 Blooms per Stem Vase Life: 8 – 12 Days",
+  "desc": "Spray roses have short individual stems on a single larger stem. Use miniature spray roses for wrist corsages, centerpieces and other small scale arrangements. You can combine spray roses with other flowers and greenery in bigger bouquets for a thick and lush appearance. Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders.",
+  "priceFrom": 85.0,
+  "priceTo": 142.5,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_82fe352a81f2426794194b168dabc5a0mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_fadfc614ebc0496db32d8b7aaea51502mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_7e0ced85e7fc459c83db0563fd79fb87mv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "120 Roses",
+    "150 Roses"
+   ],
+   "Variety": [
+    "Lydia",
+    "Pink Majolika"
+   ]
+  }
+ },
+ {
+  "id": 785,
+  "slug": "spray-roses-white",
+  "name": "Spray Roses White",
+  "category": "Spray Roses",
+  "short": "",
+  "desc": "Spray roses have short individual stems on a single larger stem. Use miniature spray roses for wrist corsages, centerpieces and other small scale arrangements. You can combine spray roses with other flowers and greenery in bigger bouquets for a thick and lush appearance. Perfect for all occasions. Fresh cut from our farm direct to you. Free Shipping in All Orders.",
+  "priceFrom": 85.0,
+  "priceTo": 127.5,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_5d0b5dbf106840e0bf1500b883293191mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_3348f796928b4a288bc36123bdb8d1fbmv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_cfd74d1955f44b2d9fb5e05b7db08fc5mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_5b88ff07de1f44e3a180ef6b862ce9e4mv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100",
+    "120 Roses",
+    "150"
+   ],
+   "Variety": [
+    "Snowdance",
+    "Vivianne"
+   ]
+  }
+ },
+ {
+  "id": 777,
+  "slug": "spray-roses-red",
+  "name": "Spray Roses Red",
+  "category": "Spray Roses",
+  "short": "5-7 Blooms per Stem Vase Life: 8 – 12 Days",
+  "desc": "Spray roses have short individual stems on a single larger stem. Use miniature spray roses for wrist corsages, centerpieces and other small scale arrangements. You can combine spray roses with other flowers and greenery in bigger bouquets for a thick and lush appearance. Perfect for all occasions. Fresh cut from our farm direct to you. Fress Shipping in All Orders",
+  "priceFrom": 85.0,
+  "priceTo": 127.5,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_6f73aed57d704c7e94a1253d46271c10mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_6f73aed57d704c7e94a1253d46271c10mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_e730f5d30c854d8aa34f7e41a13c73aamv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_3c8b2730fca144bcb2a78120741ee1a1mv2.png"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "120 Roses",
+    "150 Roses"
+   ],
+   "Variety": [
+    "Fire King",
+    "Rubicon",
+    "Scarlett Mini"
+   ]
+  }
+ },
+ {
+  "id": 529,
+  "slug": "salmon-roses",
+  "name": "Salmon Roses",
+  "category": "Wholesale Bunch Roses",
+  "short": "",
+  "desc": "Our Salmon Roses are grown with care and expertise on our farm, ensuring the highest quality and freshness. These beautiful roses feature a soft salmon pink color that is both elegant and captivating. Perfect for all occasions. Fresh from farm, deliver to your door. Free Shipping in All Orders",
+  "priceFrom": 55.0,
+  "priceTo": 137.5,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_520c79af8a89463c8cd69ff6d1d653e1mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/64dd8b_5c47f85ab21240a187256c72f1068edamv2.png",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_3b1fc4b04d4444969edc0df7bf60d7a8mv2.png"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "125 Roses",
+    "50 Roses"
+   ],
+   "Variety": [
+    "Country Home",
+    "Tiffany"
+   ]
+  }
+ },
+ {
+  "id": 527,
+  "slug": "coral-roses",
+  "name": "Coral Roses",
+  "category": "Wholesale Bunch Roses",
+  "short": "",
+  "desc": "Our Coral Roses are carefully cultivated on our farm to ensure the highest quality and vibrant color. These stunning roses are a gorgeous shade of coral, adding a pop of color to any floral arrangement or bouquet. Perfect for all occasions. Fresh from farm, deliver to your door. Free Shipping in All Orders",
+  "priceFrom": 55.0,
+  "priceTo": 137.5,
+  "images": [
+   "https://farmdirect.com/wp-content/uploads/2024/07/64dd8b_e9f03e2c8e194de380ead43a88c267e6mv2.webp",
+   "https://farmdirect.com/wp-content/uploads/2024/07/64dd8b_8485ffd17abe4b3990dd21a114d2666emv2.jpg",
+   "https://farmdirect.com/wp-content/uploads/2024/07/64dd8b_5c47f85ab21240a187256c72f1068edamv2-1.png",
+   "https://farmdirect.com/wp-content/uploads/2024/07/95a983_66d69323c5b6465ba34c2226dbef35a7mv2.webp"
+  ],
+  "attrs": {
+   "Length": [
+    "Long Stem",
+    "Short Stem"
+   ],
+   "Number of Stems Per Box": [
+    "100 Roses",
+    "125 Roses",
+    "50 Roses"
+   ],
+   "Variety": [
+    "Amsterdam",
+    "Shimmer"
+   ]
+  }
+ }
+]

@@ -1,0 +1,213 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { site } from '../data/site';
+import { ui } from '../i18n/ui';
+import { r, type Lang } from '../i18n/routes';
+import { featured } from '../data/featured';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+const v = t.varieties;
+const catImg: Record<string, string> = {
+  roses: 'freepik_a-closeup-highangle-shot-_2844838785-1.webp',
+  'garden-roses': 'freepik_a-closeup-overhead-shot-c_2844768701-1.webp',
+  'spray-roses': 'Spray-Roses.webp',
+  alstroemeria: 'freepik_a-closeup-shallow-depthof_2844339269-1.webp',
+  summer: 'freepik_a-closeup-shot-captures-a_2844462178.webp',
+};
+const hasFeatured = new Set<string>(featured.map((f) => f.cat));
+const catName = (k: string) => v.cats.find((c) => c.k === k)?.t ?? '';
+const ld = { '@context': 'https://schema.org', '@type': 'ItemList', name: v.heading, numberOfItems: featured.length };
+---
+
+<Base lang={lang} pageKey="varieties" title={v.title} description={v.description} jsonLd={[ld]} ogImage="/assets/img/Spray-Roses.webp">
+  <div class="wrap">
+    <section class="var-head">
+      <h1>{v.heading}</h1>
+      <div>
+        <h2>{v.sub}</h2>
+        <p>{v.intro}</p>
+      </div>
+    </section>
+
+    <div class="cat-grid">
+      {
+        v.cats.map((c) => (
+          <article class="cat-card">
+            <div class="cat-ph"><img src={`/assets/img/${catImg[c.k]}`} alt="" loading={c.k === 'roses' ? 'eager' : 'lazy'} decoding="async" /></div>
+            <div class="cat-body">
+              <h2>{c.t}</h2>
+              <p>{c.d}</p>
+              {hasFeatured.has(c.k) ? (
+                <a class="btn btn-outline" href="#featured" data-filter-link={c.k}>{t.common.viewVarieties} <Icon name="arrow" /></a>
+              ) : (
+                <a class="btn btn-outline" href={r('contact', lang)}>{v.askTeam} <Icon name="arrow" /></a>
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <section class="section box all-var" id="featured" aria-labelledby="featured-title">
+      <h2 id="featured-title">{v.featured.t}</h2>
+      <p style="max-width:70ch;color:var(--muted)">{v.featured.d}</p>
+
+      <div class="chips" role="group" aria-label={v.featured.t}>
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">{v.all}</button>
+        {[...hasFeatured].map((k) => <button class="chip" type="button" data-filter={k} aria-pressed="false">{catName(k)}</button>)}
+      </div>
+
+      <div class="shop" id="shop">
+        <div class="flower-grid">
+          {
+            featured.map((f) => (
+              <button class="fl-card" type="button" aria-pressed="false" data-cat={f.cat} data-name={f.name} data-meta={`${f.color[lang]} · ${catName(f.cat)}`} data-img={`/assets/img/flowers/${f.slug}.webp`}>
+                <span class="fl-ph"><img src={`/assets/img/flowers/${f.slug}.webp`} alt={f.name} width="520" height="520" loading="lazy" decoding="async" /></span>
+                <span class="fl-body">
+                  <h3>{f.name}</h3>
+                  <span class="fl-meta">{f.color[lang]} · {catName(f.cat)}</span>
+                  <span class="fl-add"><span class="off"><Icon name="arrow" />{v.featured.add}</span><span class="on">✓ {v.cart.added}</span></span>
+                </span>
+              </button>
+            ))
+          }
+        </div>
+
+        <aside class="cart" id="cart" aria-label={v.cart.title} hidden>
+          <button class="cart-head" type="button" aria-expanded="true" aria-controls="cart-body">
+            <span class="cart-title">{v.cart.title}</span>
+            <span class="cart-count" id="cart-count">0</span>
+            <Icon name="down" />
+          </button>
+          <div class="cart-body" id="cart-body">
+            <ul class="cart-list" id="cart-list"></ul>
+            <div class="cart-foot">
+              <p class="cart-total"><span>{v.cart.total}</span><b id="cart-total">0</b></p>
+              <button class="btn btn-green" type="button" id="cart-send">{v.cart.send}</button>
+              <p class="fine">{v.cart.note}</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="callout" style="margin-top:18px">
+        <h3>{v.featured.moreT}</h3>
+        <p>{v.featured.moreD}</p>
+        <div class="btn-row">
+          <a class="btn btn-outline-light" href={site.phoneHref} data-loc="varieties"><Icon name="phone" />{site.phone}</a>
+          <a class="btn btn-outline-light" href={r('contact', lang)}>{v.askTeam}</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <dialog class="modal" id="order-modal" aria-labelledby="modal-title" data-label-single={v.cart.boxOne} data-label-many={v.cart.boxMany}>
+    <div class="modal-card">
+      <button class="modal-close" type="button" aria-label={t.nav.close}><Icon name="close" /></button>
+      <h2 id="modal-title" class="form-title">{v.cart.modalT}</h2>
+      <p class="form-sub">{v.cart.modalD}</p>
+      <ul class="modal-items" id="modal-items"></ul>
+      <LeadForm lang={lang} source="varieties_order" variant="cart" submitLabel={v.cart.send} />
+    </div>
+  </dialog>
+
+  <script>
+    type Item = { name: string; meta: string; img: string; qty: number };
+    const items = new Map<string, Item>();
+    const chips = document.querySelectorAll<HTMLButtonElement>('.chip');
+    const cards = document.querySelectorAll<HTMLButtonElement>('.fl-card');
+    const shop = document.getElementById('shop')!;
+    const cart = document.getElementById('cart')!;
+    const list = document.getElementById('cart-list')!;
+    const count = document.getElementById('cart-count')!;
+    const total = document.getElementById('cart-total')!;
+    const head = cart.querySelector<HTMLButtonElement>('.cart-head')!;
+    const modal = document.getElementById('order-modal') as HTMLDialogElement;
+    const modalItems = document.getElementById('modal-items')!;
+    const msgInput = modal.querySelector<HTMLInputElement>('input[name=message]');
+    const one = modal.dataset.labelSingle || 'box';
+    const many = modal.dataset.labelMany || 'boxes';
+    const boxes = (n: number) => `${n} ${n === 1 ? one : many}`;
+
+    const render = () => {
+      const n = items.size;
+      cart.hidden = n === 0;
+      shop.classList.toggle('has-cart', n > 0);
+      let sum = 0;
+      items.forEach((i) => (sum += i.qty));
+      count.textContent = String(n);
+      total.textContent = String(sum);
+      list.innerHTML = '';
+      modalItems.innerHTML = '';
+      items.forEach((i, key) => {
+        const li = document.createElement('li');
+        li.innerHTML = '<img alt="" width="48" height="48"><span class="ci-t"><b></b><small></small></span><span class="ci-q"><button type="button" data-d="-1" aria-label="−">−</button><output></output><button type="button" data-d="1" aria-label="+">+</button></span><button type="button" class="ci-x" aria-label="×">×</button>';
+        li.querySelector('img')!.setAttribute('src', i.img);
+        li.querySelector('b')!.textContent = i.name;
+        li.querySelector('small')!.textContent = i.meta;
+        li.querySelector('output')!.textContent = String(i.qty);
+        li.querySelectorAll<HTMLButtonElement>('.ci-q button').forEach((b) =>
+          b.addEventListener('click', () => {
+            i.qty = Math.max(1, i.qty + Number(b.dataset.d));
+            render();
+          }),
+        );
+        li.querySelector('.ci-x')!.addEventListener('click', () => {
+          items.delete(key);
+          render();
+        });
+        list.appendChild(li);
+        const mi = document.createElement('li');
+        mi.textContent = `${i.name}: ${boxes(i.qty)}`;
+        modalItems.appendChild(mi);
+      });
+      cards.forEach((c) => c.setAttribute('aria-pressed', String(items.has(c.dataset.name || ''))));
+      if (msgInput) msgInput.value = [...items.values()].map((i) => `${i.name} x ${boxes(i.qty)}`).join('; ');
+    };
+
+    cards.forEach((card) =>
+      card.addEventListener('click', () => {
+        const name = card.dataset.name || '';
+        if (items.has(name)) items.delete(name);
+        else items.set(name, { name, meta: card.dataset.meta || '', img: card.dataset.img || '', qty: 1 });
+        render();
+      }),
+    );
+
+    // On phones the order starts collapsed (just the bar) so it does not cover the flowers.
+    if (window.matchMedia('(max-width: 900px)').matches) {
+      head.setAttribute('aria-expanded', 'false');
+      cart.classList.add('collapsed');
+    }
+    head.addEventListener('click', () => {
+      const open = head.getAttribute('aria-expanded') !== 'true';
+      head.setAttribute('aria-expanded', String(open));
+      cart.classList.toggle('collapsed', !open);
+    });
+    document.getElementById('cart-send')!.addEventListener('click', () => modal.showModal());
+    modal.querySelector('.modal-close')!.addEventListener('click', () => modal.close());
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.close();
+    });
+
+    const apply = (f: string) => {
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.filter === f)));
+      cards.forEach((c) => (c.hidden = f !== 'all' && c.dataset.cat !== f));
+    };
+    chips.forEach((c) => c.addEventListener('click', () => apply(c.dataset.filter || 'all')));
+    document.querySelectorAll<HTMLElement>('[data-filter-link]').forEach((a) =>
+      a.addEventListener('click', () => apply(a.dataset.filterLink || 'all')),
+    );
+    const initial = location.hash.slice(1);
+    if (['roses', 'garden-roses', 'alstroemeria'].includes(initial)) {
+      apply(initial);
+      document.getElementById('featured')?.scrollIntoView();
+    }
+  </script>
+</Base>

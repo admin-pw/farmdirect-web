@@ -1,0 +1,27 @@
+---
+import { site } from '../data/site';
+import { ui } from '../i18n/ui';
+import { varietyPath, type Lang } from '../i18n/routes';
+import { money, lengthLabel, type Variety } from '../data/varieties';
+
+interface Props {
+  lang: Lang;
+  v: Variety;
+  eager?: boolean;
+}
+const { lang, v, eager = false } = Astro.props;
+const t = ui[lang];
+const lengths = (v.attrs['Length'] ?? []).map((l) => lengthLabel(l, lang)).join(' · ');
+---
+
+<a class="tile" href={varietyPath(lang, v.slug)}>
+  <div class="ph">
+    {v.localImage && <img src={v.localImage} alt={v.name} width="480" height="360" loading={eager ? 'eager' : 'lazy'} decoding="async" />}
+  </div>
+  <div class="body">
+    <h3>{v.name}</h3>
+    {lengths && <span class="meta">{lengths}</span>}
+    {site.showPrices && v.priceFrom > 0 && <span class="price">{t.common.from} {money(v.priceFrom, lang)} {t.common.perBox}</span>}
+    <span class="more">{t.common.viewDetails} →</span>
+  </div>
+</a>

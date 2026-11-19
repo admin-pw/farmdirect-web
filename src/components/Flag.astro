@@ -1,0 +1,9 @@
+---
+// Flags are the SVG files supplied by the client (public/assets/flags), shown whole (no crop, no circle).
+interface Props {
+  code: 'us' | 'es';
+}
+const { code } = Astro.props;
+---
+
+<img class="flag-img" src={`/assets/flags/${code}.svg`} alt="" height="24" decoding="async" />

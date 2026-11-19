@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { site } from '../data/site';
+import { ui } from '../i18n/ui';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+const a = t.apply;
+---
+
+<Base lang={lang} pageKey="apply" title={a.title} description={a.description} ogImage="/assets/img/IMG_8572-2-scaled.webp">
+  <div class="wrap">
+    <section class="contact-box">
+      <div class="contact-photo" style="align-content:center">
+        <div class="ph" style="min-height:300px"><img src="/assets/img/IMG_8572-2-scaled.webp" alt={a.imgAlt} width="683" height="1024" fetchpriority="high" decoding="async" /></div>
+        <ul class="perks" style="margin-top:22px">{a.perks.map((p) => <li>{p}</li>)}</ul>
+        <p style="margin-top:20px">{t.common.orByPhone} <a href={site.phoneHref} data-loc="apply"><strong>{site.phone}</strong></a></p>
+      </div>
+      <div class="contact-panel">
+        <div class="form-card">
+          <h1>{a.h1}</h1>
+          <p class="form-sub">{a.sub}</p>
+          <LeadForm lang={lang} source="apply" variant="account" />
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>
