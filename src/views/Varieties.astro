@@ -13,6 +13,8 @@ interface Props {
 const { lang } = Astro.props;
 const t = ui[lang];
 const v = t.varieties;
+const b = v.box;
+const smsHref = (name: string) => `sms:${site.phone.replace(/[^+\d]/g, '')}?&body=${encodeURIComponent(b.smsBody.replace('{name}', name))}`;
 const catImg: Record<string, string> = {
   roses: 'freepik_a-closeup-highangle-shot-_2844838785-1.webp',
   'garden-roses': 'freepik_a-closeup-overhead-shot-c_2844768701-1.webp',
@@ -53,6 +55,47 @@ const ld = { '@context': 'https://schema.org', '@type': 'ItemList', name: v.head
         ))
       }
     </div>
+
+    <section class="section mbox" id="market-box" aria-labelledby="mbox-title" data-state="locked" data-thanks={b.thanks} data-thanks-anon={b.thanksAnon} data-sms-body={b.smsBody}>
+      <div class="mbox-stage" aria-hidden="true">
+        <span class="mbox-glow"></span>
+        <img class="mbox-img closed" src="/assets/img/promo/box-closed.webp" alt="" width="560" height="400" loading="lazy" decoding="async" />
+        <img class="mbox-img opened" src="/assets/img/promo/box-open.webp" alt="" width="560" height="400" loading="lazy" decoding="async" />
+        <span class="mbox-tag"><span class="t-lock"><Icon name="lock" />{b.locked}</span><span class="t-open">✓ {b.open}</span></span>
+      </div>
+
+      <div class="mbox-copy">
+        <p class="mbox-label">{b.label}</p>
+        <h2 id="mbox-title">{b.t}</h2>
+
+        <div class="mbox-locked">
+          <p class="mbox-teaser">{b.teaser}</p>
+          <ul class="mbox-perks">
+            {b.perks.map((p) => <li><Icon name="flower" />{p}</li>)}
+          </ul>
+          <div class="mbox-form">
+            <h3>{b.formT}</h3>
+            <p>{b.formD}</p>
+            <LeadForm lang={lang} source="market_box" variant="promo" unlock="market-box" submitLabel={b.unlock} />
+          </div>
+        </div>
+
+        <div class="mbox-unlocked" hidden>
+          <p class="mbox-thanks" id="mbox-thanks">{b.thanksAnon}</p>
+          <p class="mbox-teaser">{b.unlockedD}</p>
+          <div class="mbox-price"><b>{b.price}</b><span>{b.priceLabel}</span></div>
+          <h3 class="mbox-inside">{b.insideT}</h3>
+          <ul class="mbox-items">
+            {b.items.map((i) => <li><b>{i.q}</b><span>{i.t}</span></li>)}
+          </ul>
+          <div class="btn-row">
+            <a class="btn btn-light" id="mbox-sms" href={smsHref('')} data-loc="market_box_sms"><Icon name="mail" />{b.sms}</a>
+            <a class="btn btn-outline-light" href={site.phoneHref} data-loc="market_box_call"><Icon name="phone" />{b.call}</a>
+          </div>
+          <p class="fine">{b.fine}</p>
+        </div>
+      </div>
+    </section>
 
     <section class="section box all-var" id="featured" aria-labelledby="featured-title">
       <h2 id="featured-title">{v.featured.t}</h2>
@@ -117,6 +160,48 @@ const ld = { '@context': 'https://schema.org', '@type': 'ItemList', name: v.head
     </div>
   </dialog>
 
+  <script>
+    // Market Box promo: locked until the visitor shares their details (the lead form fires "fd:unlock").
+    const mbox = document.getElementById('market-box');
+    if (mbox) {
+      const KEY = 'fd_market_box';
+      const thanksEl = document.getElementById('mbox-thanks')!;
+      const smsEl = document.getElementById('mbox-sms') as HTMLAnchorElement;
+      const unlockedPane = mbox.querySelector<HTMLElement>('.mbox-unlocked')!;
+      const baseSms = smsEl.getAttribute('href') || '';
+      const phone = baseSms.slice(0, baseSms.indexOf('?'));
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      const open = (name: string, animate: boolean) => {
+        thanksEl.textContent = name ? (mbox.dataset.thanks || '').replace('{name}', name) : mbox.dataset.thanksAnon || '';
+        const body = (mbox.dataset.smsBody || '').replace('{name}', name || '');
+        smsEl.href = phone + (isIOS ? '&' : '?') + 'body=' + encodeURIComponent(body);
+        unlockedPane.hidden = false;
+        mbox.dataset.state = 'unlocked';
+        if (animate) {
+          mbox.classList.add('just-opened');
+          window.setTimeout(() => mbox.scrollIntoView({ behavior: 'smooth', block: 'center' }), 120);
+        }
+      };
+      try {
+        const saved = localStorage.getItem(KEY);
+        if (saved !== null) open(saved, false);
+      } catch {
+        /* storage unavailable: stays locked until they submit again */
+      }
+      window.addEventListener('fd:unlock', (e) => {
+        const d = (e as CustomEvent<{ key: string; name: string }>).detail;
+        if (d.key !== 'market-box') return;
+        try {
+          localStorage.setItem(KEY, d.name || '');
+        } catch {
+          /* ignore */
+        }
+        open(d.name || '', true);
+      });
+      // Deep link from elsewhere (#market-box) lands on the section.
+      if (location.hash === '#market-box') mbox.scrollIntoView();
+    }
+  </script>
   <script>
     type Item = { name: string; meta: string; img: string; qty: number };
     const items = new Map<string, Item>();

@@ -6,11 +6,12 @@ import { r, type Lang } from '../i18n/routes';
 interface Props {
   lang: Lang;
   source: string; // e.g. holiday_roses, apply, contact, variety_detail
-  variant?: 'quote' | 'account' | 'contact' | 'order' | 'cart';
+  variant?: 'quote' | 'account' | 'contact' | 'order' | 'cart' | 'promo';
+  unlock?: string; // when set, a successful submit fires the "fd:unlock" event instead of leaving the page
   variety?: string;
   submitLabel?: string;
 }
-const { lang, source, variant = 'quote', variety = '', submitLabel } = Astro.props;
+const { lang, source, variant = 'quote', variety = '', submitLabel, unlock = '' } = Astro.props;
 const f = ui[lang].form;
 const id = `${source}${variety ? '-' + variety : ''}`.replace(/[^a-z0-9-]/gi, '');
 const label = submitLabel ?? (variant === 'account' ? f.submitAccount : variant === 'contact' ? f.submitContact : f.submitQuote);
@@ -25,6 +26,7 @@ const label = submitLabel ?? (variant === 'account' ? f.submitAccount : variant 
   data-endpoint={site.formEndpoint}
   data-mailto={site.email}
   data-thanks={r('thanks', lang)}
+  data-unlock={unlock || undefined}
 >
   <div class="row two">
     <div class="field">
@@ -85,6 +87,7 @@ const label = submitLabel ?? (variant === 'account' ? f.submitAccount : variant 
     )
   }
   {variant === 'cart' && <input type="hidden" name="message" value="" />}
+  {variant === 'promo' && <input type="hidden" name="message" value="Market Box promo unlock" />}
   <div class="hp" aria-hidden="true">
     <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
   </div>
@@ -158,7 +161,7 @@ const label = submitLabel ?? (variant === 'account' ? f.submitAccount : variant 
       }
       // Honeypot: bots fill it. Pretend success without sending.
       if (get('website')) {
-        location.href = form.dataset.thanks || '/';
+        if (!form.dataset.unlock) location.href = form.dataset.thanks || '/';
         return;
       }
 
@@ -178,6 +181,10 @@ const label = submitLabel ?? (variant === 'account' ? f.submitAccount : variant 
       const label = btn.textContent;
       const done = () => {
         w.dataLayer.push({ event: 'lead_submit', lead_source: source, lead_lang: form.dataset.lang, variety: form.dataset.variety || undefined });
+        if (form.dataset.unlock) {
+          window.dispatchEvent(new CustomEvent('fd:unlock', { detail: { key: form.dataset.unlock, name: get('name') } }));
+          return;
+        }
         location.href = `${form.dataset.thanks}?s=${encodeURIComponent(source)}`;
       };
       const fail = () => {
@@ -192,6 +199,7 @@ const label = submitLabel ?? (variant === 'account' ? f.submitAccount : variant 
       if (!endpoint) {
         // No endpoint configured: fall back to a prefilled email so no lead is lost.
         const body = [...payload.entries()].map(([k, v]) => `${k}: ${v}`).join('\n');
+        if (form.dataset.unlock) window.dispatchEvent(new CustomEvent('fd:unlock', { detail: { key: form.dataset.unlock, name: get('name') } }));
         location.href = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent('Quote request (' + source + ')')}&body=${encodeURIComponent(body)}`;
         return;
       }

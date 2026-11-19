@@ -77,3 +77,10 @@ The Holiday Roses landing is **not part of the site**: no menu/footer links, and
 
 ## Featured varieties (from the 2026 catalog PDF)
 The site only shows a curated selection (12 flowers) from the 60-page flower catalog, so the full range is not revealed. Edit the list in `src/data/featured.ts`; photos live in `public/assets/img/flowers/` (cut out from the catalog pages). Tapping a flower adds its name to the order form's message. The per-product detail pages from the old WooCommerce data are archived (`src/pages/varieties/_[slug].astro`, `src/pages/es/variedades/_[slug].astro`); old `/product/...` URLs redirect to `/varieties/`. Language switch is a single circular flag button (shows the language you switch to).
+
+## Market Box promo (Varieties page)
+`#market-box` on `/varieties/` and `/es/variedades/` is locked (closed box, no price) until the visitor submits the lead form (`source=market_box`, `variant="promo"`, `unlock="market-box"` in `LeadForm.astro`). A successful submit fires the `fd:unlock` event, saves the first name in `localStorage` (`fd_market_box`) and opens the box in place: price, contents and a prefilled "claim by text" link. Copy lives in `ui.ts` under `varieties.box`; images in `public/assets/img/promo/`. It is a soft gate (the content is in the page source); fine for a promo, not for anything confidential.
+
+## Home interactive pieces
+- Section 2 ("story") uses an arch photo collage, tab-style Who we are / Vision / Mission and two count-up facts.
+- "High altitude, grand stems" banner: the four origin topics are icon buttons over the photo. Tapping one slides the photo to the left half and opens a text frame on the right; the icons switch topics, the X or the active icon closes it. Copy is `home.origin` in `ui.ts`.
