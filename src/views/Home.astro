@@ -20,10 +20,9 @@ const partnerIcons = ['waves', 'calendar', 'trend', 'globe'];
 const d = (i: number, step = 90) => `--d:${i * step}ms`;
 const ticker = [
   h.hero.eyebrow,
-  t.common.freeShip,
   `${fmt(h.years.big, v)} ${h.years.t}`,
-  `${h.acres.big} ${h.acres.t}`,
-  t.common.replies,
+  `${h.reach.big} ${h.reach.t}`,
+  t.common.delivery,
   t.apply.perks[3],
 ];
 ---
@@ -42,8 +41,8 @@ const ticker = [
       </div>
       <div class="hero-chips" data-reveal style="--d:1400ms">
         <div class="chip-stat"><b>{fmt(h.years.big, v)}</b><span>{h.years.t}</span></div>
-        <div class="chip-stat"><b>{h.acres.big}</b><span>{h.acres.t}</span></div>
-        <div class="chip-stat wide"><Icon name="globe" /><span>{t.common.freeShip}</span></div>
+        <div class="chip-stat"><b>{h.reach.big}</b><span>{h.reach.t}</span></div>
+        <div class="chip-stat wide"><Icon name="globe" /><span>{t.common.delivery}</span></div>
       </div>
     </section>
 
@@ -83,11 +82,11 @@ const ticker = [
         <div class="story-facts">
           <div class="fact" data-reveal>
             <div class="big" data-count={site.years} data-prefix="+">{fmt(h.years.big, v)}</div>
-            <div><h3>{h.years.t}</h3><p>{fmt(h.years.d, v)}</p></div>
+            <div><h3>{h.years.t}</h3><p>{h.years.d}</p></div>
           </div>
           <div class="fact" data-reveal style={d(1)}>
-            <div class="big" data-count="200" data-prefix="+">{h.acres.big}</div>
-            <div><h3>{h.acres.t}</h3><p>{h.acres.d}</p></div>
+            <div class="big" data-count="50">{h.reach.big}</div>
+            <div><h3>{h.reach.t}</h3><p>{h.reach.d}</p></div>
           </div>
         </div>
       </div>

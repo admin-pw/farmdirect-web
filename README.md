@@ -63,7 +63,7 @@ Mark **only** `lead_submit` / `thank_you_view` as GA4 key events (plus `click_to
 - Cancellation policy kept (5 days); the "10% card refund fee" line was dropped with the online payments.
 - [ ] `public/catalog/flipbook/index.html` loads the catalog PDF from WordPress (`PDF_URL`). Upload the PDF to the new host and update that URL.
 - [ ] Legal pages are **drafts** (marked, noindex). Replace with counsel-approved text. (`/privacy-policy` and `/terms-of-service` currently 404 on the live site.)
-- [ ] Confirm copy marked in `ui.ts`: Garden Roses blurb is new (old site reused the Roses text); "10 partner farms", "replies within 2 hours", "24 h guarantee" come from the old site.
+- [ ] Confirm copy marked in `ui.ts`: Garden Roses blurb is new (old site reused the Roses text); "replies within 2 hours" and "24 h guarantee" come from the old site.
 - [ ] Unify the "years" claim: the site now computes it from 1997 (29 in 2026). Old pages said 20/25/29/30.
 - [ ] Decide `showPrices` (flag in `site.ts`). Prices shown are the WooCommerce "from" price per box.
 - [ ] Add a cookie/consent banner if required (CCPA) once GTM is live.
@@ -85,5 +85,12 @@ The site only shows a curated selection (12 flowers) from the 60-page flower cat
 `components/Certs.astro` (Rainforest Alliance, BASC, Flor Ecuador) shows on Home and About. Logos in `public/assets/img/certs/`; copy in `ui.ts` > `certs`. The BASC file supplied is cut off on the right edge and the Flor Ecuador seal reads "Certified N° AB123": confirm both with the client.
 
 ## Home interactive pieces
-- Section 2 ("story") uses an arch photo collage, tab-style Who we are / Vision / Mission and two count-up facts.
+- Section 2 ("story") uses an arch photo collage, tab-style Who we are / How we work / Our promise and two count-up facts (years in the trade, 50 states).
 - "High altitude, grand stems" banner: the four origin topics are icon buttons over the photo. Tapping one slides the photo to the left half and opens a text frame on the right; the icons switch topics, the X or the active icon closes it. Copy is `home.origin` in `ui.ts`.
+
+## Voice and positioning
+Farm Direct is a **wholesale supplier that buys direct from partner farms in Cotopaxi**, not a grower. Copy rules (all in `src/i18n/ui.ts`, EN + ES kept in the same shape):
+- Say "direct from the farm", "partner farms", "wholesale". Do not claim ownership of land: no acreage ("200 acres" was removed everywhere), no "our farms", no "agricultural innovation".
+- Keep it short: one idea per sentence, one sentence per card. Delivery is always "3–5 business days"; shipping is always "free to all 50 states".
+- Core numbers: +years (computed from 1997 in `site.ts`) and 50 states. The About headline avoids a hard-coded year count so it never goes stale.
+- Customer reviews are verbatim and were not edited.

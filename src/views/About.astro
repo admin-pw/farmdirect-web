@@ -35,7 +35,7 @@ const d = (i: number, step = 90) => `--d:${i * step}ms`;
         </h1>
         <div class="ab-stats" data-reveal style="--d:900ms">
           <div><b data-count={site.years} data-prefix="+">{fmt(h.years.big, v)}</b><span>{h.years.t}</span></div>
-          <div><b data-count="200" data-prefix="+">{h.acres.big}</b><span>{h.acres.t}</span></div>
+          <div><b data-count="50">{h.reach.big}</b><span>{h.reach.t}</span></div>
         </div>
         <a class="btn btn-light" href="#history" data-reveal style="--d:1050ms">{t.common.scroll} <Icon name="down" /></a>
       </div>
@@ -74,7 +74,7 @@ const d = (i: number, step = 90) => `--d:${i * step}ms`;
         </div>
         <div class="route-stats">
           <div class="mini-stat" data-reveal><b>{fmt(h.years.big, v)}</b><span>{h.years.t}</span></div>
-          <div class="mini-stat dark" data-reveal style="--d:100ms"><b>{h.acres.big}</b><span>{h.acres.t}</span></div>
+          <div class="mini-stat dark" data-reveal style="--d:100ms"><b>{h.reach.big}</b><span>{h.reach.t}</span></div>
         </div>
       </div>
     </section>
@@ -92,7 +92,7 @@ const d = (i: number, step = 90) => `--d:${i * step}ms`;
             <article class="partner-card" data-reveal style={d(i)}>
               <span class="num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
               <span class="icon-circle"><Icon name={processIcons[i]} /></span>
-              <h3>{p.t.replace(/:$/, '')}</h3>
+              <h3>{p.t}</h3>
               <p>{p.d}</p>
             </article>
           ))}
