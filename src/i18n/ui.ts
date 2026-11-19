@@ -44,6 +44,15 @@ const en = {
     terms: 'Terms & Conditions',
     follow: 'Follow us',
   },
+  certs: {
+    t: 'Certified and trusted',
+    d: 'Responsible growing and secure trade, backed by recognized programs.',
+    items: [
+      { n: 'Rainforest Alliance Certified', d: 'People & Nature' },
+      { n: 'BASC', d: 'Business Alliance for Secure Commerce' },
+      { n: 'Flor Ecuador', d: 'Responsible Ecuadorian floriculture' },
+    ],
+  },
   form: {
     name: 'First name',
     lastname: 'Last name',
@@ -416,6 +425,15 @@ const es: typeof en = {
     privacy: 'Política de privacidad',
     terms: 'Términos y condiciones',
     follow: 'Síganos',
+  },
+  certs: {
+    t: 'Certificados y de confianza',
+    d: 'Cultivo responsable y comercio seguro, respaldados por programas reconocidos.',
+    items: [
+      { n: 'Rainforest Alliance Certified', d: 'Gente y naturaleza' },
+      { n: 'BASC', d: 'Alianza Empresarial para un Comercio Seguro' },
+      { n: 'Flor Ecuador', d: 'Floricultura ecuatoriana responsable' },
+    ],
   },
   form: {
     name: 'Nombre',

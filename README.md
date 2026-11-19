@@ -79,7 +79,10 @@ The Holiday Roses landing is **not part of the site**: no menu/footer links, and
 The site only shows a curated selection (12 flowers) from the 60-page flower catalog, so the full range is not revealed. Edit the list in `src/data/featured.ts`; photos live in `public/assets/img/flowers/` (cut out from the catalog pages). Tapping a flower adds its name to the order form's message. The per-product detail pages from the old WooCommerce data are archived (`src/pages/varieties/_[slug].astro`, `src/pages/es/variedades/_[slug].astro`); old `/product/...` URLs redirect to `/varieties/`. Language switch is a single circular flag button (shows the language you switch to).
 
 ## Market Box promo (Varieties page)
-`#market-box` on `/varieties/` and `/es/variedades/` is locked (closed box, no price) until the visitor submits the lead form (`source=market_box`, `variant="promo"`, `unlock="market-box"` in `LeadForm.astro`). A successful submit fires the `fd:unlock` event, saves the first name in `localStorage` (`fd_market_box`) and opens the box in place: price, contents and a prefilled "claim by text" link. Copy lives in `ui.ts` under `varieties.box`; images in `public/assets/img/promo/`. It is a soft gate (the content is in the page source); fine for a promo, not for anything confidential.
+`#market-box` is a small card in the side column under the order cart (`.shop-side`), on `/varieties/` and `/es/variedades/`. Locked: blurred closed box, no price. "Unlock" opens a modal with the lead form (`source=market_box`, `variant="promo"`, `unlock="market-box"` in `LeadForm.astro`). A successful submit fires `fd:unlock`, saves the first name in `localStorage` (`fd_market_box`), closes the modal and opens the box in place (blur off): price, contents and a prefilled "claim by text" link. Copy: `ui.ts` > `varieties.box`; images: `public/assets/img/promo/`. Soft gate only (the content is in the page source).
+
+## Certifications
+`components/Certs.astro` (Rainforest Alliance, BASC, Flor Ecuador) shows on Home and About. Logos in `public/assets/img/certs/`; copy in `ui.ts` > `certs`. The BASC file supplied is cut off on the right edge and the Flor Ecuador seal reads "Certified N° AB123": confirm both with the client.
 
 ## Home interactive pieces
 - Section 2 ("story") uses an arch photo collage, tab-style Who we are / Vision / Mission and two count-up facts.

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import Accordion from '../components/Accordion.astro';
+import Certs from '../components/Certs.astro';
 import { site } from '../data/site';
 import { ui, fmt } from '../i18n/ui';
 import { r, type Lang } from '../i18n/routes';
@@ -140,7 +141,7 @@ const ticker = [
       </div>
     </section>
 
-    <section class="section partners" aria-labelledby="partners-title">
+    <section class="section partners partners-light" aria-labelledby="partners-title">
       <div class="partners-head">
         <h2 id="partners-title" data-split>{h.partners.title}</h2>
         <p class="sub" data-reveal style="--d:200ms">{h.partners.sub}</p>
@@ -165,6 +166,8 @@ const ticker = [
         </div>
       </div>
     </section>
+
+    <Certs lang={lang} />
 
     <section class="section faq-block" aria-labelledby="faq-title">
       <div class="faq-card" data-reveal>

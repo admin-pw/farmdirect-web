@@ -1,0 +1,33 @@
+---
+import { ui } from '../i18n/ui';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = ui[lang].certs;
+const logos = [
+  { src: '/assets/img/certs/rainforest-alliance.webp', w: 360, h: 360 },
+  { src: '/assets/img/certs/basc.webp', w: 380, h: 337 },
+  { src: '/assets/img/certs/flor-ecuador.webp', w: 360, h: 360 },
+];
+---
+
+<section class="section certs" aria-labelledby="certs-title">
+  <div class="certs-head">
+    <h2 id="certs-title" data-split>{c.t}</h2>
+    <p data-reveal>{c.d}</p>
+  </div>
+  <ul class="certs-row">
+    {
+      c.items.map((it, i) => (
+        <li data-reveal style={`--d:${i * 90}ms`}>
+          <span class="cert-logo"><img src={logos[i].src} alt={it.n} width={logos[i].w} height={logos[i].h} loading="lazy" decoding="async" /></span>
+          <b>{it.n}</b>
+          <span>{it.d}</span>
+        </li>
+      ))
+    }
+  </ul>
+</section>

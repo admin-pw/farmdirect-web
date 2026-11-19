@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import Reviews from '../components/Reviews.astro';
+import Certs from '../components/Certs.astro';
 import { site } from '../data/site';
 import { ui, rich, fmt } from '../i18n/ui';
 import { r, type Lang } from '../i18n/routes';
@@ -24,16 +25,26 @@ const d = (i: number, step = 90) => `--d:${i * step}ms`;
 
 <Base lang={lang} pageKey="about" title={a.title} description={a.description} ogImage="/assets/img/IMG_8608-2.webp">
   <div class="wrap">
-    <section class="hero about-hero" aria-labelledby="about-title">
-      <img src={img('freepik_a-closeup-highangle-shot-_2844838785-1.webp')} alt="" width="1600" height="1000" fetchpriority="high" decoding="async" />
-      <div class="content">
-        <p class="eyebrow" data-reveal style="--d:80ms">{a.label}</p>
+    <section class="about-banner" aria-labelledby="about-title">
+      <div class="ab-copy">
+        <p class="ab-eyebrow" data-reveal style="--d:80ms"><Icon name="flower" />{a.label}</p>
         <h1 id="about-title" style="margin:0">
           {lines.map((line, i) => (
             <span class={i === 0 ? 'l1' : 'l2'} style={`display:block;--split-delay:${i * 420}ms`} data-split>{line}</span>
           ))}
         </h1>
-        <a class="btn btn-green btn-sq" href="#history" data-reveal style="--d:1000ms">{t.common.scroll}</a>
+        <div class="ab-stats" data-reveal style="--d:900ms">
+          <div><b data-count={site.years} data-prefix="+">{fmt(h.years.big, v)}</b><span>{h.years.t}</span></div>
+          <div><b data-count="200" data-prefix="+">{h.acres.big}</b><span>{h.acres.t}</span></div>
+        </div>
+        <a class="btn btn-light" href="#history" data-reveal style="--d:1050ms">{t.common.scroll} <Icon name="down" /></a>
+      </div>
+      <div class="ab-mosaic" aria-hidden="true">
+        <figure class="m1"><img src={img('freepik_a-closeup-highangle-shot-_2844838785-1.webp')} alt="" width="1600" height="1000" fetchpriority="high" decoding="async" /></figure>
+        <figure class="m2"><img src={img('5-2.webp')} alt="" loading="lazy" decoding="async" /></figure>
+        <figure class="m3"><img src={img('IMG_8608-2.webp')} alt="" loading="lazy" decoding="async" /></figure>
+        <span class="ab-spark s1"></span>
+        <span class="ab-spark s2"></span>
       </div>
     </section>
 
@@ -111,6 +122,8 @@ const d = (i: number, step = 90) => `--d:${i * step}ms`;
         </div>
       </div>
     </section>
+
+    <Certs lang={lang} />
 
     <section class="section box reviews" id="reviews">
       <h2 data-split>{a.reviews}</h2>
